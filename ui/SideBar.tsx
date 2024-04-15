@@ -2,13 +2,34 @@
 import NextLogo from "@/ui/NextLogo";
 import { MouseEvent, useState } from "react";
 
+type BasicSearchoption = "brand" | "component";
+
 export default function SideBar() {
-  let data = ["A", "B", "C", "D", "E", "F", "G", "H"];
+  let brand = [
+    ["Asus", "A"],
+    ["MSI", "M"],
+    ["Colorful", "C"],
+    ["Gigabyte", "G"],
+    ["EVGA", "E"],
+    ["Logitech", "L"],
+    ["Razer", "R"],
+    ["DELL", "D"],
+  ];
   const [active, setActive] = useState<String>("");
+  const [basicSearch, setBasicSearch] =
+    useState<BasicSearchoption>("component");
 
   const onClickHandler = (e: MouseEvent<HTMLDivElement>) => {
     if (e.target instanceof HTMLDivElement) {
       if (e.target.dataset.name) setActive(e.target.dataset.name);
+    }
+  };
+
+  const onClickSearchBasicHandler = (e: MouseEvent<HTMLDivElement>) => {
+    if (e.target instanceof HTMLDivElement) {
+      if (e.target.dataset.type === "brand") setBasicSearch("brand");
+      else if (e.target.dataset.type === "component")
+        setBasicSearch("component");
     }
   };
 
@@ -19,18 +40,40 @@ export default function SideBar() {
         <p className="bold font-bold">NEXT SHOP</p>
       </div>
 
-      <div className="mt-10 flex-1 flex flex-col">
-        {data.map((item) => {
+      <div className=" mt-5 flex gap-2">
+        <div
+          className={`basic-search ${
+            basicSearch === "brand" ? "bg-sky-900 scale-95" : "bg-sky-700"
+          }`}
+          data-type="brand"
+          onClick={(e) => onClickSearchBasicHandler(e)}
+        >
+          Search with brand
+        </div>
+        <div
+          className={`basic-search ${
+            basicSearch === "component" ? "bg-sky-900 scale-95" : "bg-sky-700"
+          }`}
+          data-type="component"
+          onClick={(e) => onClickSearchBasicHandler(e)}
+        >
+          Search with component
+        </div>
+      </div>
+
+      <div className="mt-5 flex-1 flex flex-col">
+        {brand.map((item) => {
+          let currentItem = basicSearch === "component" ? item[1] : item[0];
           return (
             <div
               className={`text-center p-4 cursor-pointer hover:scale-110 rounded-md transition-scale ${
-                active && active === item ? "bg-gray-700 scale-110" : ""
+                active && active === currentItem ? "bg-gray-700 scale-110" : ""
               }`}
-              key={item}
+              key={currentItem}
               onClick={(e) => onClickHandler(e)}
-              data-name={item}
+              data-name={currentItem}
             >
-              {item}
+              {currentItem}
             </div>
           );
         })}
