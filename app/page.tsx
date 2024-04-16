@@ -4,11 +4,9 @@ import OutstandingHeader from "@/ui/OutstandingHeader";
 
 export default function Home() {
   return (
-    <main>
-      <div className="body-container">
-        <Banner />
-        <OutstandingHeader />
-      </div>
-    </main>
+    <div className="body-container mt-[8%]">
+      <Banner />
+      <OutstandingHeader />
+    </div>
   );
 }

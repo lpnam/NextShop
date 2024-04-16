@@ -27,9 +27,11 @@ export default function SideBar() {
 
   const onClickSearchBasicHandler = (e: MouseEvent<HTMLDivElement>) => {
     if (e.target instanceof HTMLDivElement) {
-      if (e.target.dataset.type === "brand") setBasicSearch("brand");
-      else if (e.target.dataset.type === "component")
-        setBasicSearch("component");
+      if (
+        e.target.dataset.type === "brand" ||
+        e.target.dataset.type === "component"
+      )
+        setBasicSearch(e.target.dataset.type);
     }
   };
 

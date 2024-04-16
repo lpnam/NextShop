@@ -27,8 +27,11 @@ body {
 }
 
 @layer utilities {
+  .body-width {
+    @apply w-[65.666667%] mx-[0.5%] left-[16.666667%] rounded-t-md;
+  }
   .body-container {
-    @apply h-full w-[65.666667%] absolute mx-[0.5%] left-[16.666667%] rounded-t-xl shadow-2xl bg-slate-50 bg-opacity-15 p-1 flex flex-col;
+    @apply h-full absolute body-width shadow-2xl bg-slate-50 bg-opacity-15 p-1 flex flex-col;
   }
   .basic-search {
     @apply flex-1 text-center cursor-pointer hover:scale-95 rounded-lg shadow-md text-wrap p-1 transition-scale;

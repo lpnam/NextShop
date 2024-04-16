@@ -15,6 +15,9 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "banner-asus": "url('/asus_banner.webp')",
       },
+      colors: {
+        headerColor: "#33D100",
+      },
     },
   },
   plugins: [],
