@@ -25,7 +25,7 @@ export default function RootLayout({
           <Header />
           {children}
         </main>
-        <div className="h-screen w-1/6 fixed right-0"></div>
+        <div className=" hidden h-screen w-1/6  right-0"></div> //xl:fixed
       </body>
     </html>
   );

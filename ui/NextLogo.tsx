@@ -1,16 +1,13 @@
-interface SizeOfLogo {
-  logoWidth: number;
-  logoHeight: number;
-}
+import { SetSize } from "@/lib/define";
 
-const NextLogo = (props: SizeOfLogo) => {
+const NextLogo = (props: SetSize) => {
   return (
     <svg
       viewBox="0 0 180 180"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      width={props.logoWidth}
-      height={props.logoHeight}
+      width={props.setWidth}
+      height={props.setHeight}
     >
       <mask
         id="mask0_408_134"

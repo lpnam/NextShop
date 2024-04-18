@@ -36,9 +36,9 @@ export default function SideBar() {
   };
 
   return (
-    <div className="h-screen w-1/6 rounded-r-xl bg-white bg-opacity-20 fixed p-4 flex flex-col shadow-md">
+    <div className="h-screen w-1/6 rounded-r-xl bg-sidebarColor fixed p-4 flex flex-col shadow-md">
       <div className="w-full flex justify-evenly items-center">
-        <NextLogo logoWidth={70} logoHeight={70} />
+        <NextLogo setWidth={70} setHeight={70} />
         <p className="bold font-bold">NEXT SHOP</p>
       </div>
 
@@ -69,7 +69,9 @@ export default function SideBar() {
           return (
             <div
               className={`text-center p-4 cursor-pointer hover:scale-110 rounded-md transition-scale ${
-                active && active === currentItem ? "bg-gray-700 scale-110" : ""
+                active && active === currentItem
+                  ? "bg-onSelectColor scale-110"
+                  : ""
               }`}
               key={currentItem}
               onClick={(e) => onClickHandler(e)}

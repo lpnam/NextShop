@@ -21,8 +21,7 @@ export default function Banner() {
     return () => clearInterval(intervalID);
   }, []);
   return (
-    // <div className="h-dvh w-[65.666667%] absolute mx-[0.5%] left-[16.666667%]  rounded-t-xl shadow-2xl bg-slate-50 bg-opacity-15 p-1">
-    <div className="relative w-full overflow-hidden">
+    <div className="relative w-full shadow-2xl rounded-md overflow-hidden">
       {banners.map((banner) => {
         if (banner.index === actived_index) {
           return (
@@ -33,7 +32,7 @@ export default function Banner() {
               alt={banner.name}
               key={banner.id}
               priority
-              className="w-auto h-[520px] rounded-xl cursor-pointer"
+              className="w-full h-[420px] rounded-md cursor-pointer"
             />
           );
         }
@@ -44,8 +43,10 @@ export default function Banner() {
             return (
               <li
                 key={banner.index}
-                className={`w-3 h-3 rounded-full bg-white cursor-pointer hover:scale-150 transition-scale shadow-xl ${
-                  banner.index === actived_index ? "bg-blue-600 scale-150" : ""
+                className={`w-3 h-3 rounded-full cursor-pointer hover:scale-150 transition-scale shadow-xl ${
+                  banner.index === actived_index
+                    ? "bg-blue-600 scale-150"
+                    : "bg-inActiveColor"
                 }`}
                 onClick={() => handlClickBanner(banner.index)}
               ></li>
@@ -54,6 +55,5 @@ export default function Banner() {
         </ul>
       </div>
     </div>
-    // </div>
   );
 }
