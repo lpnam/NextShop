@@ -1,8 +1,8 @@
 "use client";
-
 import { useState } from "react";
 import SearchIcon from "@/ui/SearchIcon";
-import UserIcon from "@/ui/UserIcon";
+import Image from "next/image";
+import NextLogo from "@/logo/NextLogo";
 import ContactIcon from "@/ui/ContactIcon";
 import SupportIcon from "@/ui/SupportIicon";
 
@@ -10,12 +10,16 @@ export default function Header() {
   const [search, setSearch] = useState<string>("");
   return (
     <div className="z-[999] absolute h-[8%] body-width rounded-b-md flex items-center justify-between bg-headerColor transition-shadow">
+      <div className="flex-1 flex h-full items-center justify-center flex-grow-[2] xl:flex-grow-[3] gap-2 py-1 mx-2">
+        <NextLogo setWidth={55} setHeight={55} />
+        <span className="hidden xl:block font-bold text-2xl">NEXT SHOP</span>
+      </div>
       <form
         action=""
         role="search"
-        className="group h-[65%] flex-1 flex-grow-[6] flex justify-center "
+        className="group h-[65%] flex-1 flex-grow-[8] xl:flex-grow-[5] flex justify-start "
       >
-        <div className="group-focus-within:search-focus w-[90%] xl:ml-[10%] flex rounded-md">
+        <div className="group-focus-within:search-focus w-[90%]  flex rounded-md">
           <input
             className="focus:search-focus rounded-l-md h-full text-black px-2  bg-[#ffffff] placeholder-[#3C3C3C] flex-1 flex-grow-[9]"
             type="text"
@@ -34,7 +38,7 @@ export default function Header() {
         </div>
       </form>
 
-      <div className="hidden flex-1 xl:flex h-full items-center rounded-md flex-grow-[4] p-1 mx-2">
+      <div className="hidden flex-1 xl:flex h-full items-center rounded-md flex-grow-[2] p-1 mx-2">
         <div className={`header-button`}>
           <ContactIcon setWidth={20} setHeight={20} />
           Contact
@@ -42,10 +46,6 @@ export default function Header() {
         <div className={`header-button`}>
           <SupportIcon setWidth={20} setHeight={20} />
           Support
-        </div>
-        <div className={`header-button`}>
-          <UserIcon setWidth={20} setHeight={20} />
-          Your Account
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@ import { useSnapshot } from "valtio";
 export default function OutstandingHeader() {
   const { list } = useSnapshot(outstanding_list);
   return (
-    <div className=" mt-4 w-full h-full flex-1 grid grid-cols-2 gap-2 shadow-none bg-transparent">
+    <div className=" mt-[10px] w-full h-full flex-1 grid grid-cols-2 gap-2 shadow-none bg-transparent">
       {list.map((item) => {
         return (
           <div

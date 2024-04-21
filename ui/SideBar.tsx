@@ -75,10 +75,10 @@ export default function SideBar() {
         </div>
       </div>
       <div className="mt-5 flex-1 flex flex-col justify-start ">
-        {components.map((item) => {
+        {components.map((item, index) => {
           let currentItem = item.name;
           return (
-            <div>
+            <div key={index}>
               <div
                 className={`item-tag font-bold`}
                 key={currentItem}
@@ -117,7 +117,7 @@ export default function SideBar() {
                 } transition-show`}
               >
                 {item.child.length > 0 &&
-                  item.child.map((each, index) => {
+                  item.child.map((each, i) => {
                     return (
                       <div
                         className={`item-tag text-sm make-center ${
@@ -125,7 +125,7 @@ export default function SideBar() {
                             ? "bg-onSelectColor scale-110"
                             : ""
                         }`}
-                        key={index}
+                        key={i}
                         onClick={() => onClickHandler(each)}
                       >
                         {each}

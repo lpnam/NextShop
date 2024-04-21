@@ -57,10 +57,10 @@ body {
     @apply scale-105 border-4 border-borderColor;
   }
   .body-width {
-    @apply w-[82%] xl:w-[65.666667%] mx-[0.5%] left-[16.666667%] rounded-md;
+    @apply ssm:w-[82%] xl:w-[65.666667%] mx-[0.5%] left-[16.666667%] rounded-md;
   }
   .body-container {
-    @apply absolute body-width flex flex-col rounded-md mt-[5rem] transition-slide overflow-y-auto;
+    @apply absolute body-width flex flex-col rounded-md mt-[85px] transition-slide overflow-y-auto;
   }
 
   .text-balance {
