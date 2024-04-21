@@ -1,6 +1,9 @@
 "use client";
-import NextLogo from "@/ui/NextLogo";
+import NextLogo from "@/logo/NextLogo";
 import { MouseEvent, useState } from "react";
+import { component_list } from "@/store/items";
+import { useSnapshot } from "valtio";
+import Image from "next/image";
 
 type BasicSearchoption = "brand" | "component";
 
@@ -8,21 +11,30 @@ export default function SideBar() {
   let brand = [
     ["Asus", "A"],
     ["MSI", "M"],
-    ["Colorful", "C"],
-    ["Gigabyte", "G"],
-    ["EVGA", "E"],
+    ["Corsair", "C"],
+    ["LG", "G"],
+    ["Aorus", "B"],
     ["Logitech", "L"],
     ["Razer", "R"],
     ["DELL", "D"],
   ];
-  const [active, setActive] = useState<String>("");
+  const { components } = useSnapshot(component_list);
+  const [active, setActive] = useState<string>("");
+  const [show, setShow] = useState<string>("");
   const [basicSearch, setBasicSearch] =
     useState<BasicSearchoption>("component");
 
-  const onClickHandler = (e: MouseEvent<HTMLDivElement>) => {
-    if (e.target instanceof HTMLDivElement) {
-      if (e.target.dataset.name) setActive(e.target.dataset.name);
+  const onClickHandler = (name: string) => {
+    if (name) {
+      setActive(name);
     }
+  };
+
+  const onClickShowHandler = (name: string) => {
+    if (name && show !== name) {
+      setShow(name);
+    } else if (name && show === name) setShow("blank");
+    setActive("");
   };
 
   const onClickSearchBasicHandler = (e: MouseEvent<HTMLDivElement>) => {
@@ -36,13 +48,13 @@ export default function SideBar() {
   };
 
   return (
-    <div className="h-screen w-1/6 rounded-r-xl bg-sidebarColor fixed p-4 flex flex-col shadow-md">
+    <div className="h-full w-1/6 rounded-r-xl bg-sidebarColor fixed p-4 flex flex-col shadow-md">
       <div className="w-full flex justify-evenly items-center">
         <NextLogo setWidth={70} setHeight={70} />
         <p className="bold font-bold">NEXT SHOP</p>
       </div>
 
-      <div className=" mt-5 flex gap-2">
+      <div className=" mt-5 flex flex-wrap gap-2">
         <div
           className={`basic-search ${
             basicSearch === "brand" ? "bg-sky-900 scale-95" : "bg-sky-700"
@@ -50,7 +62,7 @@ export default function SideBar() {
           data-type="brand"
           onClick={(e) => onClickSearchBasicHandler(e)}
         >
-          Search with brand
+          Brand
         </div>
         <div
           className={`basic-search ${
@@ -59,25 +71,68 @@ export default function SideBar() {
           data-type="component"
           onClick={(e) => onClickSearchBasicHandler(e)}
         >
-          Search with component
+          Component
         </div>
       </div>
-
-      <div className="mt-5 flex-1 flex flex-col">
-        {brand.map((item) => {
-          let currentItem = basicSearch === "component" ? item[1] : item[0];
+      <div className="mt-5 flex-1 flex flex-col justify-start ">
+        {components.map((item) => {
+          let currentItem = item.name;
           return (
-            <div
-              className={`text-center p-4 cursor-pointer hover:scale-110 rounded-md transition-scale ${
-                active && active === currentItem
-                  ? "bg-onSelectColor scale-110"
-                  : ""
-              }`}
-              key={currentItem}
-              onClick={(e) => onClickHandler(e)}
-              data-name={currentItem}
-            >
-              {currentItem}
+            <div>
+              <div
+                className={`item-tag font-bold`}
+                key={currentItem}
+                onClick={() => onClickShowHandler(currentItem)}
+              >
+                <div className="flex gap-4 justify-start">
+                  <Image
+                    src={item.icon}
+                    width={30}
+                    height={30}
+                    alt={currentItem}
+                    key={currentItem}
+                    priority
+                  />
+                  {currentItem}
+                </div>
+                {item.child.length > 0 ? (
+                  <Image
+                    src="/icon/rightArrow.png"
+                    width={20}
+                    height={20}
+                    alt="arrow"
+                    key="arrow"
+                    priority
+                    className={`transition-fast ${
+                      show === currentItem ? "rotate-90" : ""
+                    }`}
+                  />
+                ) : (
+                  ""
+                )}
+              </div>
+              <div
+                className={`${
+                  show === currentItem ? "" : "hidden"
+                } transition-show`}
+              >
+                {item.child.length > 0 &&
+                  item.child.map((each, index) => {
+                    return (
+                      <div
+                        className={`item-tag text-sm make-center ${
+                          active && active === each
+                            ? "bg-onSelectColor scale-110"
+                            : ""
+                        }`}
+                        key={index}
+                        onClick={() => onClickHandler(each)}
+                      >
+                        {each}
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
           );
         })}
