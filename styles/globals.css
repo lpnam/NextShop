@@ -50,11 +50,9 @@ body {
   .search-focus {
     @apply outline-none ring ring-searchRingColor;
   }
-  .basic-search {
-    @apply flex-1 text-center cursor-pointer hover:scale-95 rounded-lg shadow-md text-wrap p-1 transition-scale;
-  }
+
   .header-button-hover {
-    @apply scale-105 border-4 border-borderColor;
+    @apply scale-105 shadow-hoverBox;
   }
   .body-width {
     @apply ssm:w-[82%] xl:w-[65.666667%] mx-[0.5%] left-[16.666667%] rounded-md;
@@ -73,7 +71,7 @@ body {
     @apply transition-all duration-500 ease-out;
   }
   .transition-fast {
-    @apply transition-all duration-150 ease-out;
+    @apply transition-all duration-100 ease-out;
   }
   .make-center {
     @apply flex justify-center items-center;

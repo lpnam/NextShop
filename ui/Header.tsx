@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
-import SearchIcon from "@/ui/SearchIcon";
+import SearchIcon from "@/icon/SearchIcon";
 import Image from "next/image";
 import NextLogo from "@/logo/NextLogo";
-import ContactIcon from "@/ui/ContactIcon";
-import SupportIcon from "@/ui/SupportIicon";
+import ContactIcon from "@/icon/ContactIcon";
+import SupportIcon from "@/icon/SupportIicon";
 
 export default function Header() {
   const [search, setSearch] = useState<string>("");

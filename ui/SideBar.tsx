@@ -1,5 +1,4 @@
 "use client";
-import NextLogo from "@/logo/NextLogo";
 import { MouseEvent, useState } from "react";
 import { component_list } from "@/store/items";
 import { useSnapshot } from "valtio";
@@ -8,16 +7,6 @@ import Image from "next/image";
 type BasicSearchoption = "brand" | "component";
 
 export default function SideBar() {
-  let brand = [
-    ["Asus", "A"],
-    ["MSI", "M"],
-    ["Corsair", "C"],
-    ["LG", "G"],
-    ["Aorus", "B"],
-    ["Logitech", "L"],
-    ["Razer", "R"],
-    ["DELL", "D"],
-  ];
   const { components } = useSnapshot(component_list);
   const [active, setActive] = useState<string>("");
   const [show, setShow] = useState<string>("");
@@ -49,32 +38,28 @@ export default function SideBar() {
 
   return (
     <div className="h-full w-1/6 rounded-r-xl bg-sidebarColor fixed p-4 flex flex-col shadow-md">
-      <div className="w-full flex justify-evenly items-center">
-        <NextLogo setWidth={70} setHeight={70} />
-        <p className="bold font-bold">NEXT SHOP</p>
+      <div className="w-full flex justify-center md:justify-start items-center gap-4">
+        <div className=" w-[55px] h-[55px] rounded-full shadow-xl cursor-pointer">
+          <Image
+            width={55}
+            height={55}
+            alt="user-avatar"
+            src="/icon/user.png"
+            className="min-w-[44px]"
+          />
+        </div>
+        <div className="hidden md:block font-bold text-nowrap text-2xl">
+          <p className="cursor-pointer hover:underline">Login</p>
+          <p className="cursor-pointer text-sm font-normal hover:underline">
+            Sign Up
+          </p>
+        </div>
       </div>
 
-      <div className=" mt-5 flex flex-wrap gap-2">
-        <div
-          className={`basic-search ${
-            basicSearch === "brand" ? "bg-sky-900 scale-95" : "bg-sky-700"
-          }`}
-          data-type="brand"
-          onClick={(e) => onClickSearchBasicHandler(e)}
-        >
-          Brand
-        </div>
-        <div
-          className={`basic-search ${
-            basicSearch === "component" ? "bg-sky-900 scale-95" : "bg-sky-700"
-          }`}
-          data-type="component"
-          onClick={(e) => onClickSearchBasicHandler(e)}
-        >
-          Component
-        </div>
+      <div className=" mt-2 flex flex-wrap gap-2 hover:shadow-hoverBox transition-fast">
+        HIHI
       </div>
-      <div className="mt-5 flex-1 flex flex-col justify-start ">
+      <div className="mt-2 flex-1 flex flex-col justify-start ">
         {components.map((item, index) => {
           let currentItem = item.name;
           return (
