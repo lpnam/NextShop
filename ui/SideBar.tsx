@@ -3,6 +3,9 @@ import { MouseEvent, useState } from "react";
 import { component_list } from "@/store/items";
 import { useSnapshot } from "valtio";
 import Image from "next/image";
+import MarkIcon from "@/icon/MarkIcon";
+import SettingIcon from "@/icon/SettingIcon";
+import CartIcon from "@/icon/CartIcon";
 
 type BasicSearchoption = "brand" | "component";
 
@@ -38,7 +41,7 @@ export default function SideBar() {
 
   return (
     <div className="h-full w-1/6 rounded-r-xl bg-sidebarColor fixed p-4 flex flex-col shadow-md">
-      <div className="w-full flex justify-center md:justify-start items-center gap-4">
+      <div className="w-full flex justify-center xl:justify-start items-center gap-4">
         <div className=" w-[55px] h-[55px] rounded-full shadow-xl cursor-pointer">
           <Image
             width={55}
@@ -48,7 +51,7 @@ export default function SideBar() {
             className="min-w-[44px]"
           />
         </div>
-        <div className="hidden md:block font-bold text-nowrap text-2xl">
+        <div className="hidden xl:block font-bold text-nowrap text-2xl">
           <p className="cursor-pointer hover:underline">Login</p>
           <p className="cursor-pointer text-sm font-normal hover:underline">
             Sign Up
@@ -56,10 +59,21 @@ export default function SideBar() {
         </div>
       </div>
 
-      <div className=" mt-2 flex flex-wrap gap-2 hover:shadow-hoverBox transition-fast">
-        HIHI
+      <div className="mt-2 flex flex-wrap gap-2 justify-evenly items-center">
+        <div className="user-buttons">
+          <SettingIcon setHeight={25} setWidth={25} />
+        </div>
+        <div className="user-buttons">
+          <MarkIcon setHeight={25} setWidth={25} />
+        </div>
+        <div className="user-buttons relative">
+          <CartIcon setHeight={25} setWidth={25} />
+          <div className="absolute top-0 right-0 text-[0.7rem] rounded-full w-[17px] h-[17px] text-center bg-red-500">
+            1
+          </div>
+        </div>
       </div>
-      <div className="mt-2 flex-1 flex flex-col justify-start ">
+      <div className="mt-4 flex-1 flex flex-col justify-start">
         {components.map((item, index) => {
           let currentItem = item.name;
           return (
@@ -77,8 +91,9 @@ export default function SideBar() {
                     alt={currentItem}
                     key={currentItem}
                     priority
+                    className="min-w-[25px]"
                   />
-                  {currentItem}
+                  <span className="hidden md:flex">{currentItem}</span>
                 </div>
                 {item.child.length > 0 ? (
                   <Image
@@ -88,7 +103,7 @@ export default function SideBar() {
                     alt="arrow"
                     key="arrow"
                     priority
-                    className={`transition-fast ${
+                    className={`hidden xl:block transition-fast ${
                       show === currentItem ? "rotate-90" : ""
                     }`}
                   />

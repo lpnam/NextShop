@@ -10,7 +10,7 @@ export default function OutstandingHeader() {
         return (
           <div
             key={item.index}
-            className="bg-outstandingColor opacity-90 make-center h-[full] rounded-2xl cursor-pointer hover:scale-95 transition-scale shadow-md text-white font-bold"
+            className="bg-outstandingColor opacity-90 make-center h-[full] rounded-2xl cursor-pointer hover:scale-95 shadow-md text-white font-bold"
           >
             {item.description}
           </div>
