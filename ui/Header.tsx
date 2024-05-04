@@ -9,8 +9,8 @@ import SupportIcon from "@/icon/SupportIicon";
 export default function Header() {
   const [search, setSearch] = useState<string>("");
   return (
-    <div className="z-[999] absolute h-[8%] body-width rounded-b-md flex items-center justify-between bg-headerColor transition-shadow">
-      <div className="flex-1 flex h-full items-center justify-center flex-grow-[2] xl:flex-grow-[3] gap-2 py-1 mx-2">
+    <div className="z-[999] absolute h-[8%] body-width rounded-b-md flex items-center justify-between bg-headerColor transition-shadow p-1">
+      <div className="flex-1 flex h-full items-center justify-center flex-grow-[2] xl:flex-grow-[3] gap-2 py-1 mx-1">
         <NextLogo setWidth={55} setHeight={55} />
         <span className="hidden xl:block font-bold text-2xl">NEXT SHOP</span>
       </div>

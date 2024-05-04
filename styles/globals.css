@@ -45,7 +45,7 @@ body {
     @apply py-4 md:px-4 cursor-pointer hover:scale-110 flex justify-center md:justify-between rounded-md transition-scale;
   }
   .item-card {
-    @apply cursor-pointer rounded-sm border border-black h-[400px];
+    @apply rounded-md border border-black h-[400px];
   }
   .search-focus {
     @apply outline-none ring ring-searchRingColor;
@@ -58,7 +58,7 @@ body {
     @apply ssm:w-[82%] xl:w-[65.666667%] mx-[0.5%] left-[16.666667%] rounded-md;
   }
   .body-container {
-    @apply absolute body-width flex flex-col rounded-md mt-[5rem] xl:mt-[25px] 2xl:mt-[4rem] overflow-y-auto;
+    @apply absolute body-width flex flex-col rounded-md mt-[4.3rem] xl:mt-[25px] 2xl:mt-[4.4%] overflow-y-auto;
   }
 
   .text-balance {

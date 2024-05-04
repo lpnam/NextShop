@@ -64,7 +64,7 @@ export default function SideBar() {
           <SettingIcon setHeight={25} setWidth={25} />
         </div>
         <div className="user-buttons">
-          <MarkIcon setHeight={25} setWidth={25} />
+          <MarkIcon setSize={{ setHeight: 25, setWidth: 25 }} />
         </div>
         <div className="user-buttons relative">
           <CartIcon setHeight={25} setWidth={25} />

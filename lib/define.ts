@@ -3,4 +3,12 @@ type SetSize = {
   setHeight: number;
 };
 
-export type { SetSize };
+type ItemInfo = {
+  name: string;
+  price: string;
+  image: Array<string>;
+  date: string;
+  code_name: string;
+};
+
+export type { SetSize, ItemInfo };
