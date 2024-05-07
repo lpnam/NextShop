@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "../styles/globals.css";
 import SideBar from "@/ui/SideBar";
 import Header from "@/ui/Header";
+import { Suspense } from "react";
+import LoadingW from "./loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,9 +26,9 @@ export default function RootLayout({
         <SideBar />
         <main>
           <Header />
-          {children}
+          <Suspense fallback={<LoadingW />}>{children}</Suspense>
         </main>
-        <div className=" hidden h-screen w-1/6  right-0"></div> //xl:fixed
+        <div className="hidden h-screen w-1/6  right-0"></div> //xl:fixed
       </body>
     </html>
   );

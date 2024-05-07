@@ -9,6 +9,7 @@ type ItemInfo = {
   image: Array<string>;
   date: string;
   code_name: string;
+  key: number;
 };
 
 export type { SetSize, ItemInfo };

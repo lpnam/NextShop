@@ -1,5 +1,6 @@
 "use client";
 import { outstanding_list } from "@/store/outstanding_header";
+import Link from "next/link";
 import { useSnapshot } from "valtio";
 
 export default function OutstandingHeader() {
@@ -8,12 +9,19 @@ export default function OutstandingHeader() {
     <div className=" mt-[10px] w-full h-full flex-1 grid grid-cols-2 gap-2 shadow-none bg-transparent">
       {list.map((item) => {
         return (
-          <div
+          // <div
+          //   key={item.index}
+          //   className="bg-outstandingColor opacity-90 make-center h-[full] rounded-2xl cursor-pointer hover:scale-95 shadow-md text-white font-bold"
+          // >
+          //   {item.description}
+          // </div>
+          <Link
+            href={item.direct}
             key={item.index}
             className="bg-outstandingColor opacity-90 make-center h-[full] rounded-2xl cursor-pointer hover:scale-95 shadow-md text-white font-bold"
           >
             {item.description}
-          </div>
+          </Link>
         );
       })}
     </div>

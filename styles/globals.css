@@ -45,7 +45,7 @@ body {
     @apply py-4 md:px-4 cursor-pointer hover:scale-110 flex justify-center md:justify-between rounded-md transition-scale;
   }
   .item-card {
-    @apply rounded-md border border-black h-[400px];
+    @apply rounded-md h-[400px]  flex flex-col rounded-t-md shadow-md mb-1;
   }
   .search-focus {
     @apply outline-none ring ring-searchRingColor;

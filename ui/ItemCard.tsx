@@ -3,10 +3,10 @@ import { ItemInfo } from "@/lib/define";
 import Image from "next/image";
 import MarkIcon from "@/icon/MarkIcon";
 import Link from "next/link";
-import { SetSize } from "@/lib/define";
+
 export default function ItemCard(props: ItemInfo) {
   return (
-    <div className="item-card flex flex-col rounded-t-md border-none shadow-md mb-1">
+    <div className="item-card" key={props.key}>
       <div className="flex-grow-[6] bg-white rounded-t-md h-[160px] make-center">
         <Image
           src={props.image[0]}
