@@ -1,32 +1,22 @@
-import { proxy } from "valtio";
 import { createClient } from "@/utils/supabase/server";
 
-type TagData = {
-  tag_id: number;
-  tag_name: string;
-};
-
-async function GetTagList(): Promise<TagData[]> {
+async function GetDataList(...filter: string[]) {
   try {
     const supabase = createClient();
-    const { data, error } = await supabase.from("tag_list").select();
-    if (error) {
-      throw new Error(error.message);
-    }
-    return data ?? [];
+    const { data, error } = await supabase
+      .from("item_tag_link")
+      .select(`item:item_id ( * )`)
+      .filter("tag_name", "cs", `{${[...filter].map((each) => each)}}`);
+    let data_list: any = [];
+    if (data) {
+      data.map((item) => {
+        data_list.push(item.item);
+      });
+    } else return [];
+    return data_list;
   } catch (error) {
     console.log(error);
     return [];
   }
 }
-
-async function initTagList() {
-  const taglist: Array<TagData> = await GetTagList();
-  return proxy<{
-    tag_list: Array<TagData>;
-  }>({
-    tag_list: taglist,
-  });
-}
-
-export const taglist = initTagList();
+export { GetDataList };

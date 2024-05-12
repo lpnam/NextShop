@@ -6,6 +6,7 @@ import Image from "next/image";
 import MarkIcon from "@/icon/MarkIcon";
 import SettingIcon from "@/icon/SettingIcon";
 import CartIcon from "@/icon/CartIcon";
+import { useRouter } from "next/navigation";
 
 type BasicSearchoption = "brand" | "component";
 
@@ -15,11 +16,15 @@ export default function SideBar() {
   const [show, setShow] = useState<string>("");
   const [basicSearch, setBasicSearch] =
     useState<BasicSearchoption>("component");
-
-  const onClickHandler = (name: string) => {
+  const router = useRouter();
+  const onClickHandler = (pagename: string, name: string) => {
     if (name) {
       setActive(name);
     }
+    router.push(
+      // `/${pagename.toLowerCase()}?fillter=${name.toLocaleLowerCase()}`
+      `/${pagename.toLowerCase()}/${name.toLowerCase()}`
+    );
   };
 
   const onClickShowHandler = (name: string) => {
@@ -126,7 +131,7 @@ export default function SideBar() {
                             : ""
                         }`}
                         key={i}
-                        onClick={() => onClickHandler(each)}
+                        onClick={() => onClickHandler(item.name, each)}
                       >
                         {each}
                       </div>

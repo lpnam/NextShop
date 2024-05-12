@@ -12,4 +12,18 @@ type ItemInfo = {
   key: number;
 };
 
-export type { SetSize, ItemInfo };
+interface InitItem {
+  date_in: string;
+  item_id: number;
+  code_name: string;
+  item_name: string;
+  item_image: string[];
+  item_price: string;
+}
+
+type TagData = {
+  tag_id: number;
+  tag_name: string;
+};
+
+export type { SetSize, ItemInfo, TagData, InitItem };
