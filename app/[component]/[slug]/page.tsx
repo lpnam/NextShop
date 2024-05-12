@@ -1,6 +1,6 @@
 import ItemCard from "@/ui/ItemCard";
 import { InitItem } from "@/lib/define";
-import { GetDataList } from "@/store/tag_list";
+import { GetDataList } from "@/store/data_list";
 
 export default async function Page({
   params,
@@ -9,13 +9,6 @@ export default async function Page({
 }) {
   const { component, slug } = params;
   const data = await GetDataList(component, slug);
-  //   const data = await GetTagList(component);
-  // const supabase = createClient();
-  // const { data, error } = await supabase
-  //   .from("item")
-  //   .select(
-  //     `item_id, item_name, item_price, item_image, date_in, code_name, tag_list( tag_id, tag_name )`
-  //   );
 
   return (
     <main>

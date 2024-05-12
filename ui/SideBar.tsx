@@ -1,5 +1,5 @@
 "use client";
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 import { component_list } from "@/store/items";
 import { useSnapshot } from "valtio";
 import Image from "next/image";
@@ -8,41 +8,38 @@ import SettingIcon from "@/icon/SettingIcon";
 import CartIcon from "@/icon/CartIcon";
 import { useRouter } from "next/navigation";
 
-type BasicSearchoption = "brand" | "component";
-
 export default function SideBar() {
   const { components } = useSnapshot(component_list);
   const [active, setActive] = useState<string>("");
   const [show, setShow] = useState<string>("");
-  const [basicSearch, setBasicSearch] =
-    useState<BasicSearchoption>("component");
   const router = useRouter();
   const onClickHandler = (pagename: string, name: string) => {
     if (name) {
       setActive(name);
     }
-    router.push(
-      // `/${pagename.toLowerCase()}?fillter=${name.toLocaleLowerCase()}`
-      `/${pagename.toLowerCase()}/${name.toLowerCase()}`
-    );
+    router.push(`/${pagename.toLowerCase()}/${name.toLowerCase()}`);
   };
 
-  const onClickShowHandler = (name: string) => {
-    if (name && show !== name) {
-      setShow(name);
-    } else if (name && show === name) setShow("blank");
-    setActive("");
-  };
-
-  const onClickSearchBasicHandler = (e: MouseEvent<HTMLDivElement>) => {
-    if (e.target instanceof HTMLDivElement) {
-      if (
-        e.target.dataset.type === "brand" ||
-        e.target.dataset.type === "component"
-      )
-        setBasicSearch(e.target.dataset.type);
+  const onClickShowHandler = (name: string, child: number) => {
+    if (window.innerWidth < 768 || child === 0)
+      router.push(`/${name.toLowerCase()}`);
+    else {
+      if (name && show !== name) {
+        setShow(name);
+      } else if (name && show === name) setShow("blank");
+      setActive("");
     }
   };
+
+  // const onClickSearchBasicHandler = (e: MouseEvent<HTMLDivElement>) => {
+  //   if (e.target instanceof HTMLDivElement) {
+  //     if (
+  //       e.target.dataset.type === "brand" ||
+  //       e.target.dataset.type === "component"
+  //     )
+  //       setBasicSearch(e.target.dataset.type);
+  //   }
+  // };
 
   return (
     <div className="h-full w-1/6 rounded-r-xl bg-sidebarColor fixed p-4 flex flex-col shadow-md">
@@ -86,7 +83,9 @@ export default function SideBar() {
               <div
                 className={`item-tag font-bold`}
                 key={currentItem}
-                onClick={() => onClickShowHandler(currentItem)}
+                onClick={() =>
+                  onClickShowHandler(currentItem, item.child.length)
+                }
               >
                 <div className="flex gap-4 justify-start">
                   <Image
