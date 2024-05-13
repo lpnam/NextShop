@@ -2,9 +2,13 @@
 import { ItemInfo } from "@/lib/define";
 import Image from "next/image";
 import MarkIcon from "@/icon/MarkIcon";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function ItemCard(props: ItemInfo) {
+  const router = useRouter();
+  const handleClickItem = (item_code: string) => {
+    router.push(`/product/${item_code.toLowerCase()}`);
+  };
   return (
     <div className="item-card" key={props.key}>
       <div className="flex-grow-[6] bg-white rounded-t-md h-[160px] make-center">
@@ -15,11 +19,17 @@ export default function ItemCard(props: ItemInfo) {
           alt={props.name}
           priority
           className="h-full rounded-t-md object-scale-down text-center cursor-pointer"
+          onClick={() => handleClickItem(props.code_name)}
         />
       </div>
       <div className="flex-grow-[4] rounded-b-md bg-slate-100 px-2 text-black flex flex-col justify-evenly">
         <h3>
-          <Link href="#">{props.name}</Link>
+          <div
+            className="cursor-pointer"
+            onClick={() => handleClickItem(props.code_name)}
+          >
+            {props.name}
+          </div>
         </h3>
         <div className="flex justify-between">
           <div className="flex flex-col">

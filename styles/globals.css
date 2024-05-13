@@ -57,7 +57,7 @@ body {
     @apply ssm:w-[82%] xl:w-[65.666667%] mx-[0.5%] left-[16.666667%] rounded-md;
   }
   .body-container {
-    @apply absolute body-width flex flex-col rounded-md mt-[5em] overflow-y-auto;
+    @apply absolute body-width flex flex-col mt-[5.2em] overflow-y-auto;
   }
   .text-balance {
     text-wrap: balance;
