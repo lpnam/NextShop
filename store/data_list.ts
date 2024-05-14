@@ -19,4 +19,19 @@ async function GetDataList(...filter: string[]) {
     return [];
   }
 }
-export { GetDataList };
+
+async function GetDetailData(filter: string) {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("item")
+      .select()
+      .eq("code_name", `${filter.toUpperCase()}`);
+    if (data) return data[0];
+    else return [];
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+}
+export { GetDataList, GetDetailData };
