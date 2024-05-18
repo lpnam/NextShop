@@ -8,25 +8,24 @@ interface DetailPageProps {
   item: ItemInfo;
 }
 
-export default function ItemCard({ item }: DetailPageProps) {
+export default function ItemSubCard({ item }: DetailPageProps) {
   const router = useRouter();
   const handleClickItem = (item_code: string) => {
     router.push(`/product/${item_code.toLowerCase()}`);
   };
   return (
-    <div className={`item-card`} key={item.key}>
-      <div className="flex-grow-[6] bg-white rounded-t-md h-[160px] make-center">
+    <div className={`item-sub-card mb-1`} key={item.key}>
+      <div className="flex-grow-[4] max-w-[40%] bg-white rounded-l-md relative object-contain make-center">
         <Image
           src={item.image[0]}
-          height={160}
-          width={500}
+          fill={true}
           alt={item.name}
           priority
-          className="h-full rounded-t-md object-scale-down text-center cursor-pointer"
+          className="rounded-l-md cursor-pointer"
           onClick={() => handleClickItem(item.code_name)}
         />
       </div>
-      <div className="flex-grow-[4] rounded-b-md bg-slate-100 px-2 text-black flex flex-col justify-evenly">
+      <div className="flex-grow-[6] max-w-[60%] rounded-r-md bg-slate-100 px-2 text-black flex flex-col justify-evenly p-1">
         <h3>
           <div
             className="cursor-pointer"

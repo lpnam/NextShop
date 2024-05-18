@@ -15,15 +15,17 @@ export default async function Page({
       <div className="body-container bg-slate-300 h-auto px-1">
         <div className="h-[125px] rounded-t-md border border-red-500 mb-1"></div>
         <div className="rounded-b-md grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-1">
-          {data?.map((item: InitItem, index: number) => {
+          {data?.map((item: InitItem) => {
             return (
               <ItemCard
-                name={item.item_name}
-                price={item.item_price}
-                image={item.item_image}
-                date={item.date_in}
-                code_name={item.code_name}
-                key={index}
+                item={{
+                  name: item.item_name,
+                  price: item.item_price,
+                  image: item.item_image,
+                  date: item.date_in,
+                  code_name: item.code_name,
+                  key: item.item_id,
+                }}
               />
             );
           })}

@@ -20,10 +20,14 @@ interface InitItem {
   item_image: string[];
   item_price: string;
 }
+interface SpecsData {
+  header: string;
+  specs: string;
+}
 
 type TagData = {
   tag_id: number;
   tag_name: string;
 };
 
-export type { SetSize, ItemInfo, TagData, InitItem };
+export type { SetSize, ItemInfo, TagData, InitItem, SpecsData };
