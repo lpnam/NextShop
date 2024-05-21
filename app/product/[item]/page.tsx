@@ -7,6 +7,7 @@ import {
 } from "@/store/data_list";
 import ItemDetail from "@/ui/ItemDetail";
 import ItemSubCard from "@/ui/ItemSubCard";
+import SpecsList from "@/ui/SpecsList";
 
 export default async function Page({ params }: { params: { item: string } }) {
   const { item } = params;
@@ -17,8 +18,8 @@ export default async function Page({ params }: { params: { item: string } }) {
 
   return (
     <main>
-      <div className="body-container h-auto px-1">
-        <div className="h-[500px] p-4 rounded-md border bg-slate-300">
+      <div className="body-container h-auto">
+        <div className="ssm:h-[1000px] md:h-[500px] p-4 rounded-md border bg-slate-300">
           <ItemDetail
             item={{
               name: data.item_name,
@@ -30,28 +31,11 @@ export default async function Page({ params }: { params: { item: string } }) {
             }}
           />
         </div>
-        <div className="rounded-md mb-1 flex gap-1 mt-1">
-          <div className="rounded-md flex-grow-[7] max-w-[70%] bg-slate-300 text-black p-2">
-            <h1 className="max-w-[80%] m-auto font-bold text-2xl my-6">
-              {" "}
-              Product Specifications
-            </h1>
-            <div className="max-w-[80%] m-auto mb-6">
-              <hr className="border-gray-500" />
-              {list_specs.map((each, index) => {
-                return (
-                  <>
-                    <div className="mt-4 flex justify-between" key={index}>
-                      <span>{each.header}</span>
-                      <span>{each.specs}</span>
-                    </div>
-                    <hr className="border-gray-500" />
-                  </>
-                );
-              })}
-            </div>
+        <div className="rounded-md mb-1 xl:flex gap-1 mt-1">
+          <div className="rounded-md relative flex-grow-[7] xl:max-w-[70%] bg-slate-300 text-black p-2 pb-6">
+            <SpecsList specs_list={list_specs} />
           </div>
-          <div className="rounded-md bg-slate-300 flex-grow-[3] max-w-[30%]">
+          <div className="rounded-md flex-grow-[3] ssm:mt-1 md:grid md:grid-cols-2 md:gap-1 xl:max-w-[30%] xl:mt-0 xl:block">
             {tag_list.map((item: InitItem) => {
               if (item.item_id !== data.item_id) {
                 return (

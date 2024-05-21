@@ -57,7 +57,7 @@ body {
     @apply scale-105 shadow-hoverBox;
   }
   .body-width {
-    @apply ssm:w-[82%] xl:w-[65.666667%] mx-[0.5%] left-[16.666667%] rounded-md;
+    @apply ssm:w-[82%] xl:w-[65.666667%] mx-[0.5%] left-[16.666667%];
   }
   .body-container {
     @apply absolute body-width flex flex-col mt-[5.2em] overflow-y-auto;

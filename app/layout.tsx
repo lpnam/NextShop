@@ -29,6 +29,7 @@ export default function RootLayout({
           <main>
             <Header />
             <Suspense fallback={<LoadingW />}>{children}</Suspense>
+            <div className="z-[999] h-[10em] ml-[20%] rounded-t-md flex items-center justify-between bg-headerColor transition-shadow p-1 bottom-0"></div>
           </main>
           <div className="hidden h-screen w-1/6 right-0"></div> //xl:fixed
         </StyledComponentsRegistry>

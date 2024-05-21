@@ -14,8 +14,8 @@ export default function ItemDetail({ item }: DetailPageProps) {
   };
 
   return (
-    <div className="w-full h-full mb-1 flex justify-center gap-1">
-      <div className="flex-grow-[3] min-w-[30%] flex flex-col ">
+    <div className="w-full h-full mb-1 md:flex justify-center gap-1 ssm:block">
+      <div className="flex-grow-[3] md:min-w-[50%] xl:min-w-[30%] flex flex-col transition-slide ssm:h-[50%] md:h-full">
         <div className="flex-grow-[8] relative object-contain mb-1">
           <Image
             src={item.image[iindex]}
@@ -26,7 +26,7 @@ export default function ItemDetail({ item }: DetailPageProps) {
             sizes="(min-width: 768px) 100vw"
           />
         </div>
-        <div className="flex-grow-[2] flex">
+        <div className="ssm:hidden flex-grow-[2] md:flex">
           {item.image.map((each: string, index: number) => {
             return (
               <div
@@ -48,7 +48,7 @@ export default function ItemDetail({ item }: DetailPageProps) {
           })}
         </div>
       </div>
-      <div className="flex-grow-[7] text-black rounded-md p-4 flex flex-col gap-10 pt-6 border-l-2 border-gray-500 ml-2">
+      <div className="flex-grow-[7] text-black rounded-md p-4 flex flex-col ssm:gap-[1.5em] pt-6 md:border-l-2 md:gap-[2.5em] xl:gap-[3.5em] border-gray-500 ml-2">
         <h1 className="font-bold text-2xl">{item.name}</h1>
         <div className="flex gap-2">
           <h2 className="font-bold text-3xl">${item.price}</h2>
@@ -56,11 +56,11 @@ export default function ItemDetail({ item }: DetailPageProps) {
             ${item.price}
           </h3>
         </div>
-        <div className="flex gap-6">
-          <div className="cursor-pointer rounded-md bg-green-600 border p-4 make-center">
+        <div className="flex ssm:flex-col md:flex-row gap-6">
+          <div className="cursor-pointer rounded-full bg-green-600 border p-4 make-center md:w-[50%] md:min-w-[150px]">
             Buy Now
           </div>
-          <div className="cursor-pointer rounded-md bg-red-600 border p-4 make-center">
+          <div className="cursor-pointer rounded-full bg-red-600 border p-4 make-center md:w-[50%] md:min-w-[150px]">
             Add to Cart
           </div>
         </div>

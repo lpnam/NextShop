@@ -20,10 +20,10 @@ interface InitItem {
   item_image: string[];
   item_price: string;
 }
-interface SpecsData {
+type SpecsData = {
   header: string;
   specs: string;
-}
+};
 
 type TagData = {
   tag_id: number;

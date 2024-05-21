@@ -14,12 +14,18 @@ export default function ItemSubCard({ item }: DetailPageProps) {
     router.push(`/product/${item_code.toLowerCase()}`);
   };
   return (
-    <div className={`item-sub-card mb-1`} key={item.key}>
+    <div
+      className={`item-sub-card mb-1 transition-scale hover:scale-[1.01] h-auto`}
+      key={item.key}
+    >
       <div className="flex-grow-[4] max-w-[40%] bg-white rounded-l-md relative object-contain make-center">
         <Image
           src={item.image[0]}
-          fill={true}
+          // fill={true}
           alt={item.name}
+          layout="responsive"
+          width={16} // Aspect ratio
+          height={9} // Aspect ratio
           priority
           className="rounded-l-md cursor-pointer"
           onClick={() => handleClickItem(item.code_name)}
