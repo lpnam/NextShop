@@ -3,7 +3,7 @@ import OutstandingHeader from "@/ui/OutstandingHeader";
 
 export default function Home() {
   return (
-    <div className="body-container h-dvh">
+    <div className="body-inside h-dvh">
       <Banner />
       <OutstandingHeader />
     </div>

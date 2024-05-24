@@ -5,6 +5,7 @@ import SideBar from "@/ui/SideBar";
 import Header from "@/ui/Header";
 import { Suspense } from "react";
 import LoadingW from "./loading";
+import Footer from "@/ui/Footer";
 import StyledComponentsRegistry from "@/lib/antd.registry";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,10 +27,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <StyledComponentsRegistry>
           <SideBar />
-          <main>
+          <main className="body-container">
             <Header />
             <Suspense fallback={<LoadingW />}>{children}</Suspense>
-            <div className="z-[999] h-[10em] ml-[20%] rounded-t-md flex items-center justify-between bg-headerColor transition-shadow p-1 bottom-0"></div>
+            <Footer />
           </main>
           <div className="hidden h-screen w-1/6 right-0"></div> //xl:fixed
         </StyledComponentsRegistry>

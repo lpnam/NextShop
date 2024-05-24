@@ -21,7 +21,7 @@ export default function Banner() {
     return () => clearInterval(intervalID);
   }, []);
   return (
-    <div className="relative w-full  rounded-md overflow-hidden">
+    <div className="relative w-full rounded-md overflow-hidden">
       {banners.map((banner) => {
         if (banner.index === actived_index) {
           return (

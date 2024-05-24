@@ -40,6 +40,24 @@ body {
   background-blend-mode: color-burn;
 }
 
+.skeleton {
+  opacity: 0.7;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+.skeleton-text {
+  width: 100%;
+  height: 0.5rem;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(200, 20%, 70%);
+  }
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
+}
+
 @layer utilities {
   .item-tag {
     @apply py-4 md:px-4 cursor-pointer hover:scale-110 flex justify-center md:justify-between rounded-md transition-scale;
@@ -60,7 +78,10 @@ body {
     @apply ssm:w-[82%] xl:w-[65.666667%] mx-[0.5%] left-[16.666667%];
   }
   .body-container {
-    @apply absolute body-width flex flex-col mt-[5.2em] overflow-y-auto;
+    @apply absolute body-width min-h-[100vh] flex flex-col gap-1 overflow-y-auto;
+  }
+  .body-inside {
+    @apply w-full flex flex-col rounded-md overflow-y-auto;
   }
   .text-balance {
     text-wrap: balance;
