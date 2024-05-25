@@ -20,6 +20,22 @@ async function GetDataList(...filter: string[]) {
   }
 }
 
+async function GetDataListByName(filter: string) {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("item")
+      .select("*")
+      .ilike("item_name", `%${filter}%`);
+    if (data) {
+      return data;
+    } else return [];
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+}
+
 async function GetSubDataList(id: number) {
   try {
     const supabase = createClient();
@@ -95,4 +111,5 @@ export {
   GetTagList,
   GetSubDataList,
   GetSpecsDetail,
+  GetDataListByName,
 };

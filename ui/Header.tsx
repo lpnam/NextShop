@@ -4,9 +4,15 @@ import SearchIcon from "@/icon/SearchIcon";
 import NextLogo from "@/logo/NextLogo";
 import ContactIcon from "@/icon/ContactIcon";
 import SupportIcon from "@/icon/SupportIicon";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const [search, setSearch] = useState<string>("");
+  const router = useRouter();
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    router.push(`/search?opt=${search}`);
+  };
   return (
     <div className="z-[999] h-[5em] w-full rounded-b-md flex items-center justify-between bg-headerColor transition-shadow p-1">
       <div className="flex-1 flex h-full items-center justify-center flex-grow-[2] xl:flex-grow-[3] gap-2 py-1 mx-1">
@@ -31,6 +37,7 @@ export default function Header() {
           <button
             type="submit"
             className=" flex-1 flex-grow-[1] rounded-r-md p-[0.2em] focus:scale-105 bg-[#5c677d] make-center"
+            onClick={(e) => handleClick(e)}
           >
             <SearchIcon setWidth={30} setHeight={30} />
           </button>

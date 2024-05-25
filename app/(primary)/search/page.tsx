@@ -1,10 +1,16 @@
 import { createClient } from "@/utils/supabase/server";
 import ItemCard from "@/ui/ItemCard";
 import { InitItem } from "@/lib/define";
+import { GetDataListByName } from "@/store/data_list";
 
-export default async function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | "" };
+}) {
   const supabase = createClient();
-  const { data } = await supabase.from("item").select();
+  const { opt } = searchParams;
+  const data = await GetDataListByName(opt);
 
   return (
     <div className="body-inside bg-slate-300 h-auto px-1">
