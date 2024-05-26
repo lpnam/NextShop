@@ -1,4 +1,3 @@
-import { createClient } from "@/utils/supabase/server";
 import ItemCard from "@/ui/ItemCard";
 import { InitItem } from "@/lib/define";
 import { GetDataListByName } from "@/store/data_list";
@@ -8,7 +7,6 @@ export default async function Page({
 }: {
   searchParams: { [key: string]: string | "" };
 }) {
-  const supabase = createClient();
   const { opt } = searchParams;
   const data = await GetDataListByName(opt);
 

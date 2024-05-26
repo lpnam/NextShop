@@ -30,4 +30,9 @@ type TagData = {
   tag_name: string;
 };
 
-export type { SetSize, ItemInfo, TagData, InitItem, SpecsData };
+type List = {
+  name: string;
+  quantity: string;
+};
+
+export type { SetSize, ItemInfo, TagData, InitItem, SpecsData, List };

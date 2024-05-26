@@ -2,7 +2,9 @@
 import { ItemInfo } from "@/lib/define";
 import Image from "next/image";
 import MarkIcon from "@/icon/MarkIcon";
+import AddCartIcon from "@/icon/AddCartIcon";
 import { useRouter } from "next/navigation";
+import * as buyList from "@/utils/handle/handle_buylist";
 
 interface DetailPageProps {
   item: ItemInfo;
@@ -13,6 +15,11 @@ export default function ItemCard({ item }: DetailPageProps) {
   const handleClickItem = (item_code: string) => {
     router.push(`/product/${item_code.toLowerCase()}`);
   };
+
+  const handleAddItem = (name: string) => {
+    buyList.addItemBuyList(name);
+  };
+
   return (
     <div className={`item-card`} key={item.key}>
       <div className="flex-grow-[6] bg-white rounded-t-md h-[160px] make-center">
@@ -40,7 +47,14 @@ export default function ItemCard({ item }: DetailPageProps) {
             <span className="text-gray-600 line-through">${item.price}</span>
             <span className="font-bold">${item.price}</span>
           </div>
-          <div className="p-4 cursor-pointer">
+
+          <div className="flex gap-2 p-4">
+            <div
+              className="cursor-pointer"
+              onClick={() => handleAddItem(item.name)}
+            >
+              <AddCartIcon setSize={{ setHeight: 20, setWidth: 20 }} selected />
+            </div>
             <MarkIcon setSize={{ setHeight: 20, setWidth: 20 }} selected />
           </div>
         </div>

@@ -12,7 +12,7 @@ const MarkIcon = ({ setSize, selected }: MarkIconProps) => {
       width={setSize ? setSize.setWidth : 20}
       height={setSize ? setSize.setHeight : 20}
       viewBox="0 0 512 512"
-      className={`${selected ? "bg-slate-500" : ""}`}
+      className={`cursor-pointer ${selected ? "bg-slate-500" : ""}`}
     >
       <path
         d="M128 80V64a48.14 48.14 0 0148-48h224a48.14 48.14 0 0148 48v368l-80-64"
