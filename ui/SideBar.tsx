@@ -7,14 +7,12 @@ import MarkIcon from "@/icon/MarkIcon";
 import SettingIcon from "@/icon/SettingIcon";
 import CartIcon from "@/icon/CartIcon";
 import { useRouter } from "next/navigation";
-import * as buyList from "@/utils/handle/handle_buylist";
-import { item_count } from "@/store/item_count";
+import { useCountItems } from "@/contexts/CountItems";
 
 export default function SideBar() {
   const { components } = useSnapshot(component_list);
-  let { count_i } = useSnapshot(item_count);
   const [active, setActive] = useState<string>("");
-
+  const { countItem } = useCountItems();
   const [show, setShow] = useState<string>("");
   const router = useRouter();
   const onClickHandler = (pagename: string, name: string) => {
@@ -75,7 +73,7 @@ export default function SideBar() {
         <div className="user-buttons relative">
           <CartIcon setHeight={25} setWidth={25} />
           <div className="absolute top-0 right-0 text-[0.7rem] rounded-full w-[17px] h-[17px] text-center bg-red-500">
-            {count_i}
+            {countItem}
           </div>
         </div>
       </div>

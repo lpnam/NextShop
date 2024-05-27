@@ -4,7 +4,7 @@ import Image from "next/image";
 import MarkIcon from "@/icon/MarkIcon";
 import AddCartIcon from "@/icon/AddCartIcon";
 import { useRouter } from "next/navigation";
-import * as buyList from "@/utils/handle/handle_buylist";
+import { useCountItems } from "@/contexts/CountItems";
 
 interface DetailPageProps {
   item: ItemInfo;
@@ -12,12 +12,13 @@ interface DetailPageProps {
 
 export default function ItemCard({ item }: DetailPageProps) {
   const router = useRouter();
+  const { addItem } = useCountItems();
   const handleClickItem = (item_code: string) => {
     router.push(`/product/${item_code.toLowerCase()}`);
   };
 
   const handleAddItem = (name: string) => {
-    buyList.addItemBuyList(name);
+    addItem(name);
   };
 
   return (

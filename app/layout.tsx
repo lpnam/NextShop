@@ -6,6 +6,7 @@ import Header from "@/ui/Header";
 import { Suspense } from "react";
 import LoadingW from "./loading";
 import Footer from "@/ui/Footer";
+import { CountProvider } from "@/contexts/CountItems";
 import StyledComponentsRegistry from "@/lib/antd.registry";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,13 +27,15 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <StyledComponentsRegistry>
-          <SideBar />
-          <main className="body-container">
-            <Header />
-            <Suspense fallback={<LoadingW />}>{children}</Suspense>
-            <Footer />
-          </main>
-          <div className="hidden h-screen w-1/6 right-0"></div> //xl:fixed
+          <CountProvider>
+            <SideBar />
+            <main className="body-container">
+              <Header />
+              <Suspense fallback={<LoadingW />}>{children}</Suspense>
+              <Footer />
+            </main>
+            <div className="hidden h-screen w-1/6 right-0"></div> //xl:fixed
+          </CountProvider>
         </StyledComponentsRegistry>
       </body>
     </html>
