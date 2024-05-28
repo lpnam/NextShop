@@ -1,12 +1,13 @@
-"use client";
 import { List } from "@/lib/define";
 
 const BUYLIST_KEY = "BList";
 
 function getBuyList() {
-  const data = window.localStorage.getItem(BUYLIST_KEY);
-  const buylist = data ? JSON.parse(data) : [];
-  return buylist;
+  if (typeof window !== "undefined" && window.localStorage) {
+    const data = window.localStorage?.getItem(BUYLIST_KEY);
+    const buylist = data ? JSON.parse(data) : [];
+    return buylist;
+  } else return [];
 }
 
 function getNumberOfIitems() {
@@ -20,7 +21,9 @@ function getNumberOfIitems() {
 }
 
 function setBuyList(data: List[]) {
-  window.localStorage.setItem(BUYLIST_KEY, JSON.stringify(data));
+  if (typeof window !== "undefined" && window.localStorage) {
+    return window.localStorage?.setItem(BUYLIST_KEY, JSON.stringify(data));
+  }
 }
 
 function addItemBuyList(name_item: string) {
