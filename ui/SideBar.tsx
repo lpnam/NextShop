@@ -70,7 +70,10 @@ export default function SideBar() {
         <div className="user-buttons">
           <MarkIcon setSize={{ setHeight: 25, setWidth: 25 }} />
         </div>
-        <div className="user-buttons relative">
+        <div
+          className="user-buttons relative"
+          onClick={() => router.push("/cart")}
+        >
           <CartIcon setHeight={25} setWidth={25} />
           <div className="absolute top-0 right-0 text-[0.7rem] rounded-full w-[17px] h-[17px] text-center bg-red-500">
             {countItem}

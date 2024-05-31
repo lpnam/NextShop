@@ -11,8 +11,8 @@ export default async function Page({
   const data = await GetDataList(component, slug);
 
   return (
-    <div className="body-inside bg-slate-300 h-auto px-1 flex-grow-[2]">
-      <div className="h-[125px] rounded-t-md border border-red-500 mb-1"></div>
+    <div className="body-inside bg-slate-300 h-auto px-1 flex-grow-[4] min-h-[50vh]">
+      <div className="h-[125px] rounded-t-md mb-1"></div>
       <div className="rounded-b-md grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-1">
         {data?.map((item: InitItem) => {
           return (

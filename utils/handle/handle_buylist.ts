@@ -3,9 +3,9 @@ import { List } from "@/lib/define";
 const BUYLIST_KEY = "BList";
 
 function getBuyList() {
-  if (typeof window !== "undefined" && window.localStorage) {
+  if (typeof window !== "undefined") {
     const data = window.localStorage?.getItem(BUYLIST_KEY);
-    const buylist = data ? JSON.parse(data) : [];
+    const buylist: List[] = data ? JSON.parse(data) : [];
     return buylist;
   } else return [];
 }
@@ -21,26 +21,37 @@ function getNumberOfIitems() {
 }
 
 function setBuyList(data: List[]) {
-  if (typeof window !== "undefined" && window.localStorage) {
+  if (typeof window !== "undefined") {
     return window.localStorage?.setItem(BUYLIST_KEY, JSON.stringify(data));
   }
 }
 
-function addItemBuyList(name_item: string) {
+function addItemBuyList(itemlist: List) {
   let buylist: List[] = getBuyList();
   if (Array.isArray(buylist)) {
-    const index = buylist.findIndex((item: List) => item.name === name_item);
+    const index = buylist.findIndex(
+      (item: List) => item.name === itemlist.name
+    );
     if (index > 0) {
       let num_quantity = Number(buylist[index].quantity) + 1;
       buylist[index].quantity = num_quantity + "";
     } else {
-      buylist = [...buylist, { name: name_item, quantity: "1" }];
+      buylist = [
+        ...buylist,
+        {
+          name: itemlist.name,
+          quantity: itemlist.quantity,
+          price: itemlist.price,
+          image: itemlist.image,
+          code: itemlist.code,
+        },
+      ];
     }
     setBuyList(buylist);
   }
 }
 
-function removeItemBuyList(name_item: string) {
+function decreaseItemQuantity(name_item: string) {
   let buylist: List[] = getBuyList();
   const index = buylist.findIndex((item: List) => item.name === name_item);
   if (index > 0) {
@@ -51,10 +62,43 @@ function removeItemBuyList(name_item: string) {
   setBuyList(buylist);
 }
 
+function removeItemBuyList(name_item: string) {
+  let buylist: List[] = getBuyList();
+  const index = buylist.findIndex((item: List) => item.name === name_item);
+  if (index > 0) {
+    buylist.splice(index, 1);
+  }
+  setBuyList(buylist);
+}
+
+function getTotalPriceFromList() {
+  let buylist: List[] = getBuyList();
+  let price: number = 0;
+  if (buylist.length === 0) return price;
+  else {
+    buylist.forEach(
+      (el: List) => (price = price + Number(el.quantity) * Number(el.price))
+    );
+  }
+  return price;
+}
+
+function getItemQuantity(name_item: string) {
+  let buylist: List[] = getBuyList();
+  const index = buylist.findIndex((item: List) => item.name === name_item);
+  if (index > 0) {
+    return Number(buylist[index].quantity);
+  }
+  return 0;
+}
+
 export {
   addItemBuyList,
   removeItemBuyList,
   getBuyList,
   setBuyList,
   getNumberOfIitems,
+  getTotalPriceFromList,
+  decreaseItemQuantity,
+  getItemQuantity,
 };

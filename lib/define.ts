@@ -33,6 +33,9 @@ type TagData = {
 type List = {
   name: string;
   quantity: string;
+  price: string;
+  image: string;
+  code: string;
 };
 
 export type { SetSize, ItemInfo, TagData, InitItem, SpecsData, List };

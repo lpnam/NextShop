@@ -5,6 +5,7 @@ import MarkIcon from "@/icon/MarkIcon";
 import AddCartIcon from "@/icon/AddCartIcon";
 import { useRouter } from "next/navigation";
 import { useCountItems } from "@/contexts/CountItems";
+import { List } from "@/lib/define";
 
 interface DetailPageProps {
   item: ItemInfo;
@@ -17,8 +18,16 @@ export default function ItemCard({ item }: DetailPageProps) {
     router.push(`/product/${item_code.toLowerCase()}`);
   };
 
-  const handleAddItem = (name: string) => {
-    addItem(name);
+  const handleAddItem = (itemlist: List) => {
+    addItem(itemlist);
+  };
+
+  const item_list: List = {
+    name: item.name,
+    price: item.price,
+    image: item.image[0],
+    code: item.code_name,
+    quantity: "1",
   };
 
   return (
@@ -52,7 +61,7 @@ export default function ItemCard({ item }: DetailPageProps) {
           <div className="flex gap-2 p-4">
             <div
               className="cursor-pointer"
-              onClick={() => handleAddItem(item.name)}
+              onClick={() => handleAddItem(item_list)}
             >
               <AddCartIcon setSize={{ setHeight: 20, setWidth: 20 }} selected />
             </div>
