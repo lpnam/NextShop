@@ -4,15 +4,16 @@ import { List } from "@/lib/define";
 import BuyListItemCard from "@/ui/BuyListItemCard";
 
 export default function CartPage() {
-  const itemslist = useCountItems();
-  let data: List[] = itemslist.getListItem();
+  const listItem = useCountItems();
+  let data: List[] = listItem.getListItem();
+
   return (
-    <div className="w-full rounded-md overflow-y-auto bg-slate-300 h-auto px-1 min-h-[40vh] flex-grow-[4] flex">
-      <div className="h-auto w-full flex-grow-[7] max-w-[70%] border border-black h-100vh p-4 flex">
-        {/* {data.map((each: List) => {
+    <div className="w-full rounded-md overflow-y-auto bg-slate-300 px-1 min-h-[40vh]">
+      <div className="h-auto p-4 flex flex-col">
+        {data.map((each: List, index: number) => {
           return (
             <BuyListItemCard
-              key={each.code}
+              key={index}
               item={{
                 name: each.name,
                 price: each.price,
@@ -22,9 +23,22 @@ export default function CartPage() {
               }}
             />
           );
-        })} */}
+        })}
       </div>
-      <div className="flex-grow-[3] max-w-[30%] border border-black h-100vh p-4"></div>
+      <div className="text-black h-auto flex flex-col items-center gap-4 p-4">
+        <h1 className="font-bold text-2xl mb-4">CheckOut</h1>
+        <h2 className="text-xl ">
+          Items:
+          <span className="font-bold"> {listItem.countItem}</span>
+        </h2>
+        <h2 className="text-xl ">
+          Total:
+          <span className="font-bold"> ${listItem.totalPrice}</span>
+        </h2>
+        <div className="border rounded-lg p-4 mb-2 cursor-pointer hover:scale-90">
+          Buy Now
+        </div>
+      </div>
     </div>
   );
 }

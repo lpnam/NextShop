@@ -1,23 +1,34 @@
 "use client";
 import { useCountItems } from "@/contexts/CountItems";
+import { useState, useEffect } from "react";
 import { List } from "@/lib/define";
 import Image from "next/image";
 
 interface DetailPageProps {
   item: List;
-  key: string;
 }
 
 export default function BuyListItemCard({ item }: DetailPageProps) {
-  //   const handleAddItem = (name: string, price: string) => {
-  //     addItem(name, price);
-  //   };
+  const [quantity, setQuantity] = useState<number>(0);
+  const itemlist = useCountItems();
+
+  useEffect(() => {
+    console.log("Trigger BuyListItem");
+    setQuantity(Number(item.quantity));
+  }, []);
+
+  const handleOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let new_quantity = e.target.value.replace(/[^0-9]/g, "");
+    if (new_quantity === "") new_quantity = "1";
+    itemlist.updateItemQuantity(item.name, new_quantity, item.price);
+    setQuantity(Number(new_quantity));
+  };
 
   return (
     <div
-      className={`item-sub-card mb-1 transition-scale hover:scale-[1.01] h-auto`}
+      className={`rounded-md w-full flex flex-row shadow-md max-h-[180px] mb-1 relative`}
     >
-      <div className="flex-grow-[4] max-w-[40%] bg-white rounded-l-md relative object-contain make-center">
+      <div className="flex-grow-[1.5] max-w-[15%] rounded-l-md relative make-center">
         <Image
           src={item.image}
           // fill={true}
@@ -26,17 +37,53 @@ export default function BuyListItemCard({ item }: DetailPageProps) {
           width={16} // Aspect ratio
           height={9} // Aspect ratio
           priority
-          className="rounded-l-md cursor-pointer"
+          className="rounded-l-md cursor-pointer object-scale-down"
         />
       </div>
-      <div className="flex-grow-[6] max-w-[60%] rounded-r-md bg-slate-100 px-2 text-black flex flex-col justify-evenly p-1">
+      <div className="flex-grow-[8.5] max-w-[85%] rounded-r-md px-2 text-black flex flex-col justify-evenly p-1">
         <h3>
           <div className="cursor-pointer">{item.name}</div>
         </h3>
         <div className="flex justify-between">
           <span className="font-bold">${item.price}</span>
+          <div className="shadow-md flex">
+            <div
+              className="w-[25px] cursor-pointer text-center rounded-l-md bg-green-300"
+              onClick={() => {
+                setQuantity((prev) => prev + 1);
+                itemlist.addItem(item);
+              }}
+            >
+              +
+            </div>
+            <input
+              className="w-[60px] text-center"
+              type="text"
+              name="quantity"
+              id="item-quantity"
+              value={quantity}
+              onChange={(e) => handleOnchange(e)}
+            />
+            <div
+              className="w-[25px] cursor-pointer text-center rounded-r-md bg-red-300"
+              onClick={() => {
+                if (quantity === 0) setQuantity(0);
+                else setQuantity((prev) => prev - 1);
+                itemlist.removeItem(false, item.name, item.price);
+              }}
+            >
+              -
+            </div>
+          </div>
         </div>
-        <div>Rating</div>
+      </div>
+      <div
+        className="h-[50px] w-[50px] bg-white bg-opacity-50 rounded-tr-md rounded-bl-md text-black cursor-pointer make-center text-xl hover:scale-95 transition-scale"
+        onClick={() => {
+          itemlist.removeItem(true, item.name, item.price);
+        }}
+      >
+        X
       </div>
     </div>
   );

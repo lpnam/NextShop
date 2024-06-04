@@ -32,7 +32,7 @@ function addItemBuyList(itemlist: List) {
     const index = buylist.findIndex(
       (item: List) => item.name === itemlist.name
     );
-    if (index > 0) {
+    if (index >= 0) {
       let num_quantity = Number(buylist[index].quantity) + 1;
       buylist[index].quantity = num_quantity + "";
     } else {
@@ -54,7 +54,7 @@ function addItemBuyList(itemlist: List) {
 function decreaseItemQuantity(name_item: string) {
   let buylist: List[] = getBuyList();
   const index = buylist.findIndex((item: List) => item.name === name_item);
-  if (index > 0) {
+  if (index >= 0) {
     let num_quantity = Number(buylist[index].quantity) - 1;
     if (num_quantity > 0) buylist[index].quantity = num_quantity + "";
     else buylist.splice(index, 1);
@@ -65,7 +65,7 @@ function decreaseItemQuantity(name_item: string) {
 function removeItemBuyList(name_item: string) {
   let buylist: List[] = getBuyList();
   const index = buylist.findIndex((item: List) => item.name === name_item);
-  if (index > 0) {
+  if (index >= 0) {
     buylist.splice(index, 1);
   }
   setBuyList(buylist);
@@ -76,9 +76,11 @@ function getTotalPriceFromList() {
   let price: number = 0;
   if (buylist.length === 0) return price;
   else {
-    buylist.forEach(
-      (el: List) => (price = price + Number(el.quantity) * Number(el.price))
-    );
+    buylist.forEach((el: List) => {
+      const n_price: string = el.price.trim().replace(/[^0-9.-]/g, "");
+      const p: number = Number(n_price) ? Number(n_price) : parseFloat(n_price);
+      return (price += Number(el.quantity) * p);
+    });
   }
   return price;
 }
@@ -86,9 +88,19 @@ function getTotalPriceFromList() {
 function getItemQuantity(name_item: string) {
   let buylist: List[] = getBuyList();
   const index = buylist.findIndex((item: List) => item.name === name_item);
-  if (index > 0) {
+  if (index >= 0) {
     return Number(buylist[index].quantity);
   }
+  return 0;
+}
+
+function updateItemQuantity(name_item: string, new_quatity: string) {
+  let buylist: List[] = getBuyList();
+  const index = buylist.findIndex((item: List) => item.name === name_item);
+  if (index > 0) {
+    buylist[index].quantity = new_quatity;
+  }
+  setBuyList(buylist);
   return 0;
 }
 
@@ -101,4 +113,5 @@ export {
   getTotalPriceFromList,
   decreaseItemQuantity,
   getItemQuantity,
+  updateItemQuantity,
 };
