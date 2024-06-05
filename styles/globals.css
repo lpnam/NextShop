@@ -24,16 +24,6 @@
   box-sizing: border-box;
 }
 
-/* body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-} */
-
 body {
   color: rgb(var(--foreground-rgb));
   background: #979dac;
@@ -55,6 +45,25 @@ body {
   }
   100% {
     background-color: hsl(200, 20%, 95%);
+  }
+}
+
+@layer base {
+  :root {
+    --color-primary: 143 180 255;
+    --color-secondary: 151 157 172;
+    --color-border: 173 232 244;
+    --color-search: 4 102 200;
+    --color-selected: 0 24 69;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-primary: 0 40 85;
+      --color-secondary: 151 157 172;
+      --color-border: 173 232 244;
+      --color-search: 4 102 200;
+      --color-selected: 0 24 69;
+    }
   }
 }
 

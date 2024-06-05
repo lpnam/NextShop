@@ -94,12 +94,15 @@ function getItemQuantity(name_item: string) {
   return 0;
 }
 
-function updateItemQuantity(name_item: string, new_quatity: string) {
+function updateItemQuantity(name_item: string, new_quantity: string) {
   let buylist: List[] = getBuyList();
   const index = buylist.findIndex((item: List) => item.name === name_item);
-  if (index > 0) {
-    buylist[index].quantity = new_quatity;
+
+  if (index >= 0) {
+    console.log(new_quantity);
+    buylist[index].quantity = new_quantity;
   }
+
   setBuyList(buylist);
   return 0;
 }

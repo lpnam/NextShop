@@ -62,8 +62,6 @@ export function CountProvider({ children }: React.PropsWithChildren) {
     price: string
   ) {
     const old_quantity: number = getItemQuantity(name);
-    console.log(old_quantity);
-    console.log(new_quantity);
     const p: number = getPrice(price);
 
     setCountItem((prev) => {
@@ -101,7 +99,6 @@ export function CountProvider({ children }: React.PropsWithChildren) {
   }
 
   useEffect(() => {
-    console.log("Trigger CounterItem");
     setCountItem(buyList.getNumberOfIitems());
     setTotalPrice(buyList.getTotalPriceFromList());
   }, []);

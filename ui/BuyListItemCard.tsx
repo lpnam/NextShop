@@ -13,12 +13,11 @@ export default function BuyListItemCard({ item }: DetailPageProps) {
   const itemlist = useCountItems();
 
   useEffect(() => {
-    console.log("Trigger BuyListItem");
     setQuantity(Number(item.quantity));
   }, []);
 
   const handleOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let new_quantity = e.target.value.replace(/[^0-9]/g, "");
+    let new_quantity: string = e.target.value.replace(/[^0-9]/g, "");
     if (new_quantity === "") new_quantity = "1";
     itemlist.updateItemQuantity(item.name, new_quantity, item.price);
     setQuantity(Number(new_quantity));
@@ -26,9 +25,9 @@ export default function BuyListItemCard({ item }: DetailPageProps) {
 
   return (
     <div
-      className={`rounded-md w-full flex flex-row shadow-md max-h-[180px] mb-1 relative`}
+      className={`rounded-md w-full flex flex-row shadow-md max-h-[180px] mb-2 relative`}
     >
-      <div className="flex-grow-[1.5] max-w-[15%] rounded-l-md relative make-center">
+      <div className="flex-grow-[1.5] max-w-[15%] rounded-l-md relative make-center p-1">
         <Image
           src={item.image}
           // fill={true}

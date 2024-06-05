@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./page/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./ui/**/*.{js,ts,jsx,tsx,mdx}",
@@ -23,14 +23,14 @@ const config: Config = {
         "banner-asus": "url('/asus_banner.webp')",
       },
       colors: {
-        headerColor: "#002855",
-        searchRingColor: "#0466c8",
-        sidebarColor: "#002855",
-        onSelectColor: "#001845",
-        outstandingColor: "#002855",
-        inActiveColor: "#979dac",
-        backgroundColor: "#979dac",
-        borderColor: "#ade8f4",
+        headerColor: "rgb(var(--color-primary) / <alpha-value>)",
+        searchRingColor: "rgb(var(--color-search) / <alpha-value>)",
+        sidebarColor: "rgb(var(--color-primary) / <alpha-value>)",
+        onSelectColor: "rgb(var(--color-selected) / <alpha-value>)",
+        outstandingColor: "rgb(var(--color-primary) / <alpha-value>)",
+        inActiveColor: "rgb(var(--color-secondary) / <alpha-value>)",
+        backgroundColor: "rgb(var(--color-secondary) / <alpha-value>)",
+        borderColor: "rgb(var(--color-border) / <alpha-value>)",
       },
     },
   },
