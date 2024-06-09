@@ -34,7 +34,8 @@ export default function RootLayout({
               <Suspense fallback={<LoadingW />}>{children}</Suspense>
               <Footer />
             </main>
-            <div className="hidden h-screen w-1/6 right-0"></div> //xl:fixed
+            <div className="hidden h-screen w-1/6 right-0">for ads</div>{" "}
+            //xl:fixed
           </CountProvider>
         </StyledComponentsRegistry>
       </body>

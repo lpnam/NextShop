@@ -12,6 +12,7 @@ import { useCountItems } from "@/contexts/CountItems";
 export default function SideBar() {
   const { components } = useSnapshot(component_list);
   const [active, setActive] = useState<string>("");
+  const [toggle, setToggle] = useState<boolean>(false);
   const { countItem } = useCountItems();
   const [show, setShow] = useState<string>("");
   const router = useRouter();
