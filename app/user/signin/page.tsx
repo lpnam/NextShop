@@ -20,7 +20,7 @@ export default function Page() {
                 name="id_user"
                 id="id_user"
                 placeholder="Email or Phone number"
-                className="px-1 py-2 rounded-sm"
+                className="px-3 py-2 rounded-sm"
               />
             </div>
             <div className="flex ssm:flex-col md:flex-row">
@@ -32,7 +32,7 @@ export default function Page() {
                 name="pw_user"
                 id="pw_user"
                 placeholder="6 Charaters or more"
-                className="px-1 py-2 rounded-sm"
+                className="px-3 py-2 rounded-sm"
               />
             </div>
           </div>
@@ -56,10 +56,10 @@ export default function Page() {
           </p>
         </div>
         <div className="w-full text-white flex flex-col items-center justify-center mt-[3em] gap-4">
-          <div className="px-1 py-2 w-[50%] text-center rounded-lg hover:scale-105 hover:cursor-pointer transition-scale bg-headerColor">
+          <div className="px-1 py-2 ssm:w-[70%] md:w-[50%] text-center rounded-lg hover:scale-105 hover:cursor-pointer transition-scale bg-headerColor">
             Sign in with (icon)
           </div>
-          <div className="px-3 py-2 w-[50%] text-center rounded-lg hover:scale-105 hover:cursor-pointer transition-scale bg-headerColor">
+          <div className="px-3 py-2 ssm:w-[70%] md:w-[50%] text-center rounded-lg hover:scale-105 hover:cursor-pointer transition-scale bg-headerColor">
             Sign in with (icon)
           </div>
         </div>
