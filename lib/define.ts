@@ -38,4 +38,11 @@ type List = {
   code: string;
 };
 
-export type { SetSize, ItemInfo, TagData, InitItem, SpecsData, List };
+type UserData = {
+  first_name: string;
+  last_name: string;
+  email: string;
+  passcode: string;
+};
+
+export type { SetSize, ItemInfo, TagData, InitItem, SpecsData, List, UserData };

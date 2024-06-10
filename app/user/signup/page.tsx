@@ -3,10 +3,13 @@ import Link from "next/link";
 import EyeIcon from "@/icon/EyeIcon";
 import EyeOffIcon from "@/icon/EyeOffIcon";
 import { useState } from "react";
+import { pushUserData } from "@/user/user_utils";
 
 export default function Page() {
-  const [show, setShow] = useState<boolean>(false);
-  const handleClick = () => setShow((prev) => !prev);
+  const [show1, setShow1] = useState<boolean>(false);
+  const handleClick1 = () => setShow1((prev) => !prev);
+  const [show2, setShow2] = useState<boolean>(false);
+  const handleClick2 = () => setShow2((prev) => !prev);
   return (
     <div className="body-inside h-dvh bg-slate-300 flex items-center text-black">
       <div className="w-[70%] mt-[8em] p-2 flex flex-col items-center">
@@ -14,7 +17,7 @@ export default function Page() {
         <form
           action="signup"
           method="post"
-          className="flex flex-col gap-4 w-[50%]"
+          className="flex flex-col gap-4 ssm:w-full md:w-[60%]"
         >
           <div className="flex flex-col items-start gap-4">
             <div className="flex flex-col w-full">
@@ -25,6 +28,7 @@ export default function Page() {
                 type="text"
                 name="f_name"
                 id="f_name"
+                required
                 className="px-3 py-2 rounded-sm "
               />
             </div>
@@ -36,6 +40,7 @@ export default function Page() {
                 type="text"
                 name="l_name"
                 id="l_name"
+                required
                 className="px-3 py-2 rounded-sm "
               />
             </div>
@@ -47,6 +52,7 @@ export default function Page() {
                 type="text"
                 name="id_user"
                 id="id_user"
+                required
                 className="px-3 py-2 rounded-sm "
               />
             </div>
@@ -54,18 +60,19 @@ export default function Page() {
               <label className="mr-4" htmlFor="pw_user">
                 Password
               </label>
-              <div className="flex items-center bg-white">
+              <div className="flex items-center bg-white relative">
                 <input
-                  type={show ? "text" : "password"}
+                  type={show1 ? "text" : "password"}
                   name="pw_user"
                   id="pw_user"
-                  className="px-3 py-2 rounded-sm flex-grow-[90%]"
+                  required
+                  className="px-3 py-2 pr-8 rounded-sm w-full focus:ring-0 focus:border-none"
                 />
                 <div
-                  className="hover:cursor-pointer "
-                  onClick={() => handleClick()}
+                  className="absolute hover:cursor-pointer w-[20px] right-2"
+                  onClick={() => handleClick1()}
                 >
-                  {show ? (
+                  {show1 ? (
                     <EyeOffIcon setWidth={20} setHeight={20} />
                   ) : (
                     <EyeIcon setWidth={20} setHeight={20} />
@@ -77,12 +84,25 @@ export default function Page() {
               <label className="mr-4" htmlFor="pw_user">
                 Confirm password
               </label>
-              <input
-                type="password"
-                name="c_pw_user"
-                id="c_pw_user"
-                className="px-3 py-2 rounded-sm"
-              />
+              <div className="flex items-center bg-white relative">
+                <input
+                  type={show2 ? "text" : "password"}
+                  name="c_pw_user"
+                  id="c_pw_user"
+                  required
+                  className="px-3 py-2 pr-8 rounded-sm w-full focus:ring-0 focus:border-none"
+                />
+                <div
+                  className="absolute hover:cursor-pointer right-2"
+                  onClick={() => handleClick2()}
+                >
+                  {show2 ? (
+                    <EyeOffIcon setWidth={20} setHeight={20} />
+                  ) : (
+                    <EyeIcon setWidth={20} setHeight={20} />
+                  )}
+                </div>
+              </div>
             </div>
             <div className="flex w-full items-start justify-start gap-2">
               <input

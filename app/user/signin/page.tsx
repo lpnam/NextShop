@@ -1,6 +1,12 @@
+"use client";
 import Link from "next/link";
+import { useState } from "react";
+import EyeIcon from "@/icon/EyeIcon";
+import EyeOffIcon from "@/icon/EyeOffIcon";
 
 export default function Page() {
+  const [show1, setShow1] = useState<boolean>(false);
+  const handleClick1 = () => setShow1((prev) => !prev);
   return (
     <div className="body-inside h-dvh bg-slate-300 flex items-center text-black">
       <div className="w-[70%] mt-[8em] p-2 flex flex-col items-center">
@@ -13,27 +19,39 @@ export default function Page() {
           <div className="flex flex-col items-end gap-4">
             <div className="flex ssm:flex-col md:flex-row">
               <label className="mr-4" htmlFor="id_user">
-                ID:
+                Email:
               </label>
               <input
                 type="text"
                 name="id_user"
                 id="id_user"
-                placeholder="Email or Phone number"
-                className="px-3 py-2 rounded-sm"
+                placeholder=""
+                className="px-3 py-2 pr-8 rounded-sm w-full"
               />
             </div>
             <div className="flex ssm:flex-col md:flex-row">
               <label className="mr-4" htmlFor="pw_user">
                 Password:
               </label>
-              <input
-                type="password"
-                name="pw_user"
-                id="pw_user"
-                placeholder="6 Charaters or more"
-                className="px-3 py-2 rounded-sm"
-              />
+              <div className="flex items-center bg-white relative">
+                <input
+                  type={show1 ? "text" : "password"}
+                  name="pw_user"
+                  id="pw_user"
+                  required
+                  className="px-3 py-2 pr-8 rounded-sm w-full"
+                />
+                <div
+                  className="absolute hover:cursor-pointer right-2"
+                  onClick={() => handleClick1()}
+                >
+                  {show1 ? (
+                    <EyeOffIcon setWidth={20} setHeight={20} />
+                  ) : (
+                    <EyeIcon setWidth={20} setHeight={20} />
+                  )}
+                </div>
+              </div>
             </div>
           </div>
           <button

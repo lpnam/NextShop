@@ -57,8 +57,16 @@ export default function SideBar() {
           />
         </div>
         <div className="hidden xl:block font-bold text-nowrap text-2xl">
-          <p className="cursor-pointer hover:underline">Login</p>
-          <p className="cursor-pointer text-sm font-normal hover:underline">
+          <p
+            className="cursor-pointer hover:underline"
+            onClick={() => router.push("/user/signin")}
+          >
+            Login
+          </p>
+          <p
+            className="cursor-pointer text-sm font-normal hover:underline"
+            onClick={() => router.push("/user/signup")}
+          >
             Sign Up
           </p>
         </div>
