@@ -3,7 +3,6 @@ import Link from "next/link";
 import EyeIcon from "@/icon/EyeIcon";
 import EyeOffIcon from "@/icon/EyeOffIcon";
 import { useState } from "react";
-import { pushUserData } from "@/user/user_utils";
 
 export default function Page() {
   const [show1, setShow1] = useState<boolean>(false);

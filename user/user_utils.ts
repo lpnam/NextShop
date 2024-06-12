@@ -4,8 +4,7 @@ import { UserData } from "@/lib/define";
 async function pushUserData(user: UserData) {
   try {
     const supabase = createClient();
-    const { data, error } = await supabase.from("User").insert([user]).select();
-    console.log(data);
+    await supabase.from("User").insert([user]).select();
   } catch (error) {
     console.log(error);
     return [];

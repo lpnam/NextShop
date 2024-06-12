@@ -54,6 +54,7 @@ export default function SideBar() {
             alt="user-avatar"
             src="/icon/user.png"
             className="min-w-[44px]"
+            priority
           />
         </div>
         <div className="hidden xl:block font-bold text-nowrap text-2xl">
