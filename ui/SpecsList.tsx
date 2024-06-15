@@ -25,13 +25,13 @@ export default function SpecsList({ specs_list }: specs) {
         <hr className="border-gray-500" />
         {specs_list.map((each, index) => {
           return (
-            <Fragment key={index}>
+            <div key={index}>
               <div className="mt-4 flex justify-between">
                 <span className="font-bold">{each.header}</span>
                 <span>{each.specs}</span>
               </div>
               <hr className="border-gray-500" />
-            </Fragment>
+            </div>
           );
         })}
       </div>

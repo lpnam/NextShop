@@ -4,62 +4,18 @@ import EyeIcon from "@/icon/EyeIcon";
 import EyeOffIcon from "@/icon/EyeOffIcon";
 import { useState } from "react";
 
-export default function Page() {
+export default function SignupPage() {
   const [show1, setShow1] = useState<boolean>(false);
   const handleClick1 = () => setShow1((prev) => !prev);
   const [show2, setShow2] = useState<boolean>(false);
   const handleClick2 = () => setShow2((prev) => !prev);
-
-  const [fName, setFName] = useState<string>("");
-  const [lName, setLName] = useState<string>("");
-
-  const [formData, setFormData] = useState({
-    f_name: "",
-    l_name: "",
-    id_user: "",
-    pw_user: "",
-    c_pw_user: "",
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch("/api/user/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const rs = await response.json();
-
-      if (rs.status === 200 || rs.status === 201) {
-        alert("Signup successfully!");
-      } else {
-        alert(rs.message);
-      }
-    } catch (error) {
-      console.error("Error submitting form data:", error);
-    }
-  };
-
   return (
     <div className="body-inside h-dvh bg-slate-300 flex items-center text-black">
       <div className="w-[70%] my-auto p-2 flex flex-col items-center">
         <h1 className="text-2xl mb-6 font-bold pl-16 self-start">Sign Up</h1>
         <form
-          action="submit"
-          onSubmit={handleSubmit}
+          action="signup"
+          method="post"
           className="flex flex-col gap-4 ssm:w-full md:w-[60%]"
         >
           <div className="flex flex-col items-start gap-4">
@@ -71,8 +27,6 @@ export default function Page() {
                 type="text"
                 name="f_name"
                 id="f_name"
-                value={formData.f_name}
-                onChange={handleChange}
                 required
                 className="px-3 py-2 rounded-sm "
               />
@@ -85,8 +39,6 @@ export default function Page() {
                 type="text"
                 name="l_name"
                 id="l_name"
-                value={formData.l_name}
-                onChange={handleChange}
                 required
                 className="px-3 py-2 rounded-sm "
               />
@@ -99,8 +51,6 @@ export default function Page() {
                 type="text"
                 name="id_user"
                 id="id_user"
-                value={formData.id_user}
-                onChange={handleChange}
                 required
                 className="px-3 py-2 rounded-sm "
               />
@@ -114,8 +64,6 @@ export default function Page() {
                   type={show1 ? "text" : "password"}
                   name="pw_user"
                   id="pw_user"
-                  value={formData.pw_user}
-                  onChange={handleChange}
                   required
                   className="px-3 py-2 pr-8 rounded-sm w-full focus:ring-0 focus:border-none"
                 />
@@ -140,8 +88,6 @@ export default function Page() {
                   type={show2 ? "text" : "password"}
                   name="c_pw_user"
                   id="c_pw_user"
-                  value={formData.c_pw_user}
-                  onChange={handleChange}
                   required
                   className="px-3 py-2 pr-8 rounded-sm w-full focus:ring-0 focus:border-none"
                 />
