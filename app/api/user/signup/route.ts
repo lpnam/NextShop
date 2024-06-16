@@ -2,13 +2,7 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import { UserData } from "@/lib/define";
 import { pushUserData } from "@/user/user_utils";
-// const schema = zfd.formData({
-//   f_name: zfd.text(),
-//   l_name: zfd.text(),
-//   id_user: zfd.text(),
-//   pw_user: zfd.text(),
-//   c_pw_user: zfd.text(),
-// });
+import { redirect } from "next/navigation";
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -37,6 +31,8 @@ export async function POST(request: Request) {
   const resp = await pushUserData(datax);
 
   if (resp === "200") {
+    // alert("Signup successfully!");
+    // redirect("/user/signin");
     return NextResponse.json({
       message: "Signup Success",
       status: 201,

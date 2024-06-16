@@ -10,8 +10,7 @@ export default function Page() {
   const [show2, setShow2] = useState<boolean>(false);
   const handleClick2 = () => setShow2((prev) => !prev);
 
-  const [fName, setFName] = useState<string>("");
-  const [lName, setLName] = useState<string>("");
+  const [showSucess, setShowSucess] = useState<boolean>(false);
 
   const [formData, setFormData] = useState({
     f_name: "",
@@ -44,7 +43,14 @@ export default function Page() {
       const rs = await response.json();
 
       if (rs.status === 200 || rs.status === 201) {
-        alert("Signup successfully!");
+        setShowSucess(true);
+        setFormData({
+          f_name: "",
+          l_name: "",
+          id_user: "",
+          pw_user: "",
+          c_pw_user: "",
+        });
       } else {
         alert(rs.message);
       }
@@ -54,7 +60,33 @@ export default function Page() {
   };
 
   return (
-    <div className="body-inside h-dvh bg-slate-300 flex items-center text-black">
+    <div className="body-inside h-dvh bg-slate-300 flex items-center text-black relative">
+      <div
+        className={`absolute h-[20%] w-[50%] bg-slate-200 top-[30%] shadow-lg rounded-md z-50 ${
+          showSucess ? "" : "hidden"
+        }`}
+      >
+        <div
+          className="absolute right-0 p-4 hover:cursor-pointer"
+          onClick={() => setShowSucess(false)}
+        >
+          X
+        </div>
+        <h2 className="text-center font-bold text-2xl mt-6 text-green-600">
+          Sign Up Successfully!
+        </h2>
+        <p className="text-center mt-8 text-xl">
+          Now, you can Sign In at{" "}
+          <span>
+            <Link
+              className="text-blue-600 underline hover:text-blue-900"
+              href="/user/signin"
+            >
+              here
+            </Link>
+          </span>
+        </p>
+      </div>
       <div className="w-[70%] my-auto p-2 flex flex-col items-center">
         <h1 className="text-2xl mb-6 font-bold pl-16 self-start">Sign Up</h1>
         <form

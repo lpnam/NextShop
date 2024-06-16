@@ -1,6 +1,6 @@
 "use client";
 import { SpecsData } from "@/lib/define";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
 interface specs {
   specs_list: SpecsData[];
