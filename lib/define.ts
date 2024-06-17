@@ -45,4 +45,18 @@ type UserData = {
   passcode: string;
 };
 
-export type { SetSize, ItemInfo, TagData, InitItem, SpecsData, List, UserData };
+type ResponseData = {
+  status: boolean;
+  message: string;
+};
+
+export type {
+  SetSize,
+  ItemInfo,
+  TagData,
+  InitItem,
+  SpecsData,
+  List,
+  UserData,
+  ResponseData,
+};

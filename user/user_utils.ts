@@ -1,10 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
-import { UserData } from "@/lib/define";
-
-interface ResponseData {
-  status: boolean;
-  message: string;
-}
+import { UserData, ResponseData } from "@/lib/define";
+import bcrypt from "bcrypt";
 
 async function pushUserData(user: UserData) {
   try {
@@ -15,14 +11,53 @@ async function pushUserData(user: UserData) {
         .from("User")
         .insert([user])
         .select();
-      if (error) return error;
-      else return "200";
+      if (error)
+        return <ResponseData>{ status: false, message: "Something went wrong" };
+      else
+        return <ResponseData>{ status: true, message: "Sign Up Sucessfully" };
     } else {
-      return check.message;
+      return check;
     }
   } catch (error) {
     console.log(error);
-    return error;
+    return <ResponseData>{ status: false, message: "Something went wrong" };
+  }
+}
+
+async function userSignIn(email: string, pw: string) {
+  try {
+    const supabase = createClient();
+    const check: ResponseData = await checkUserID(email);
+    if (!check.status) {
+      const { data, error } = await supabase
+        .from("User")
+        .select("*")
+        .eq("email", email);
+      if (error)
+        return <ResponseData>{ status: false, message: "Something went wrong" };
+      else {
+        console.log(data);
+        const isPasswordValid = await bcrypt.compare(pw, data[0].passcode);
+        if (!isPasswordValid)
+          <ResponseData>{
+            status: false,
+            message: "Your account and password not match",
+          };
+        return <ResponseData>{
+          status: true,
+          message:
+            "Welcome back " + data[0].first_name + " " + data[0].last_name,
+        };
+      }
+    } else {
+      return <ResponseData>{
+        status: false,
+        message: "Your account and password not match",
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    return <ResponseData>{ status: false, message: "Something went wrong" };
   }
 }
 
@@ -44,4 +79,4 @@ async function checkUserID(email: string) {
   }
 }
 
-export { pushUserData, checkUserID };
+export { pushUserData, checkUserID, userSignIn };

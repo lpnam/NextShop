@@ -7,6 +7,47 @@ import EyeOffIcon from "@/icon/EyeOffIcon";
 export default function Page() {
   const [show1, setShow1] = useState<boolean>(false);
   const handleClick1 = () => setShow1((prev) => !prev);
+  const [signIn, setSignIn] = useState({
+    id_user: "",
+    pw_user: "",
+  });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setSignIn((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("/api/user/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(signIn),
+      });
+
+      const rs = await response.json();
+
+      setSignIn((prev) => ({
+        ...prev,
+        pw_user: "",
+      }));
+
+      alert(rs.message);
+
+      if (rs.status === 200 || rs.status === 201) {
+        // setShowSucess(true);
+      } else {
+        alert(rs.message);
+      }
+    } catch (error) {
+      console.error("Error submitting data:", error);
+    }
+  };
   return (
     <div className="body-inside h-dvh bg-slate-300 flex items-center text-black">
       <div className="w-[70%] mt-[8em] p-2 flex flex-col items-center">
@@ -14,6 +55,7 @@ export default function Page() {
         <form
           action="login"
           method="post"
+          onSubmit={handleSubmit}
           className="flex ssm:flex-col md:flex-row gap-4"
         >
           <div className="flex flex-col items-end gap-4">
@@ -25,6 +67,7 @@ export default function Page() {
                 type="text"
                 name="id_user"
                 id="id_user"
+                onChange={handleChange}
                 placeholder=""
                 className="px-3 py-2 pr-8 rounded-sm w-full"
               />
@@ -38,6 +81,7 @@ export default function Page() {
                   type={show1 ? "text" : "password"}
                   name="pw_user"
                   id="pw_user"
+                  onChange={handleChange}
                   required
                   className="px-3 py-2 pr-8 rounded-sm w-full"
                 />
