@@ -8,11 +8,11 @@ import SettingIcon from "@/icon/SettingIcon";
 import CartIcon from "@/icon/CartIcon";
 import { useRouter } from "next/navigation";
 import { useCountItems } from "@/contexts/CountItems";
+import { useAppDispatch, useAppSelector } from "@/app/cushook/hooks";
 
 export default function SideBar() {
   const { components } = useSnapshot(component_list);
   const [active, setActive] = useState<string>("");
-  const [toggle, setToggle] = useState<boolean>(false);
   const { countItem } = useCountItems();
   const [show, setShow] = useState<string>("");
   const router = useRouter();
@@ -52,7 +52,7 @@ export default function SideBar() {
             width={55}
             height={55}
             alt="user-avatar"
-            src="/icon/user.png"
+            src="/icon/user_online.png"
             className="min-w-[44px]"
             priority
           />
