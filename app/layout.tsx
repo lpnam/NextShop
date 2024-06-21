@@ -8,8 +8,7 @@ import LoadingW from "./loading";
 import Footer from "@/ui/Footer";
 import { CountProvider } from "@/contexts/CountItems";
 import StyledComponentsRegistry from "@/lib/antd.registry";
-import { Provider } from "react-redux";
-import user from "@/contexts/user/user";
+import { UserStateProvider } from "@/contexts/user/UserState";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,7 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <StyledComponentsRegistry>
-          <Provider store={user}>
+          <UserStateProvider>
             <CountProvider>
               <SideBar />
               <main className="body-container">
@@ -40,7 +39,7 @@ export default function RootLayout({
               <div className="hidden h-screen w-1/6 right-0">for ads</div>{" "}
               //xl:fixed
             </CountProvider>
-          </Provider>
+          </UserStateProvider>
         </StyledComponentsRegistry>
       </body>
     </html>

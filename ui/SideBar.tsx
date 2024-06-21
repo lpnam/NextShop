@@ -9,8 +9,12 @@ import CartIcon from "@/icon/CartIcon";
 import { useRouter } from "next/navigation";
 import { useCountItems } from "@/contexts/CountItems";
 import { useAppDispatch, useAppSelector } from "@/app/cushook/hooks";
+import { signInSuccess, signOutSuccess } from "@/contexts/user/userSlice";
 
 export default function SideBar() {
+  const state_user = useAppSelector((state) => state.userState.value);
+  const dispatch = useAppDispatch();
+
   const { components } = useSnapshot(component_list);
   const [active, setActive] = useState<string>("");
   const { countItem } = useCountItems();
