@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
-import { ResponseData } from "@/lib/define";
-import { userSignIn } from "@/user/user_utils";
+import { ResponseData, UserData } from "@/lib/define";
+import { userSignIn, getUserInfo } from "@/user/user_utils";
 import { redirect } from "next/navigation";
+import { User } from "@supabase/supabase-js";
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -17,11 +18,13 @@ export async function POST(request: Request) {
   const resp: ResponseData = await userSignIn(id_user, pw_user);
 
   if (resp.status) {
+    const data: UserData = await getUserInfo(id_user);
     // alert("Signup successfully!");
     // redirect("/user/signin");
     return NextResponse.json({
       message: resp.message,
       status: 200,
+      data: data,
     });
   }
   return NextResponse.json({

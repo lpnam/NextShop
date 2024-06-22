@@ -8,13 +8,12 @@ import SettingIcon from "@/icon/SettingIcon";
 import CartIcon from "@/icon/CartIcon";
 import { useRouter } from "next/navigation";
 import { useCountItems } from "@/contexts/CountItems";
-import { useAppDispatch, useAppSelector } from "@/app/cushook/hooks";
-import { signInSuccess, signOutSuccess } from "@/contexts/user/userSlice";
+import { useAppSelector } from "@/app/cushook/hooks";
+import { userSignIn, userSignOut } from "@/contexts/user/userSlice";
 
 export default function SideBar() {
-  const state_user = useAppSelector((state) => state.userState.value);
-  const dispatch = useAppDispatch();
-
+  const state_user = useAppSelector((state) => state.userState);
+  // const dispatch = useAppDispatch();
   const { components } = useSnapshot(component_list);
   const [active, setActive] = useState<string>("");
   const { countItem } = useCountItems();
@@ -66,13 +65,15 @@ export default function SideBar() {
             className="cursor-pointer hover:underline"
             onClick={() => router.push("/user/signin")}
           >
-            Login
+            {state_user.online
+              ? state_user.first_name + " " + state_user.last_name
+              : "Login"}
           </p>
           <p
             className="cursor-pointer text-sm font-normal hover:underline"
             onClick={() => router.push("/user/signup")}
           >
-            Sign Up
+            {state_user.online ? "Sign Out" : "Sign Up"}
           </p>
         </div>
       </div>

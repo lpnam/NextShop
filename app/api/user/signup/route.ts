@@ -26,6 +26,7 @@ export async function POST(request: Request) {
     last_name: l_name,
     email: id_user,
     passcode: pw,
+    image: "",
   };
 
   const resp: ResponseData = await pushUserData(datax);

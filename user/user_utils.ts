@@ -36,7 +36,7 @@ async function userSignIn(email: string, pw: string) {
       if (error)
         return <ResponseData>{ status: false, message: "Something went wrong" };
       else {
-        console.log(data);
+        // console.log(data);
         const isPasswordValid = await bcrypt.compare(pw, data[0].passcode);
         if (!isPasswordValid)
           <ResponseData>{
@@ -79,4 +79,32 @@ async function checkUserID(email: string) {
   }
 }
 
-export { pushUserData, checkUserID, userSignIn };
+async function getUserInfo(email: string) {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("User")
+      .select("*")
+      .eq("email", email);
+    if (error) throw error;
+
+    return {
+      first_name: data[0].first_name ?? "",
+      last_name: data[0].last_name ?? "",
+      email: data[0].email ?? "",
+      passcode: "",
+      image: data[0].user_ima ?? "",
+    };
+  } catch (error) {
+    console.log(error);
+    return <UserData>{
+      first_name: "",
+      last_name: "",
+      email: "",
+      passcode: "",
+      image: "",
+    };
+  }
+}
+
+export { pushUserData, checkUserID, userSignIn, getUserInfo };

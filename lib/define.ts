@@ -43,6 +43,7 @@ type UserData = {
   last_name: string;
   email: string;
   passcode: string;
+  image: string;
 };
 
 type ResponseData = {

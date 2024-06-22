@@ -3,8 +3,12 @@ import Link from "next/link";
 import { useState } from "react";
 import EyeIcon from "@/icon/EyeIcon";
 import EyeOffIcon from "@/icon/EyeOffIcon";
+import { useAppDispatch, useAppSelector } from "@/app/cushook/hooks";
+import { userSignIn } from "@/contexts/user/userSlice";
 
 export default function Page() {
+  const state_user = useAppSelector((state) => state.userState);
+  const dispatch = useAppDispatch();
   const [show1, setShow1] = useState<boolean>(false);
   const handleClick1 = () => setShow1((prev) => !prev);
   const [signIn, setSignIn] = useState({
@@ -40,7 +44,7 @@ export default function Page() {
       alert(rs.message);
 
       if (rs.status === 200 || rs.status === 201) {
-        // setShowSucess(true);
+        dispatch(userSignIn(rs.data));
       } else {
         alert(rs.message);
       }
