@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./user";
 import { UserData } from "@/lib/define";
-import { User } from "@supabase/supabase-js";
 
 interface UserState {
   first_name: string;
@@ -9,6 +8,7 @@ interface UserState {
   email: string;
   image: string;
   online: boolean;
+  curr_url: string;
 }
 
 const initialState: UserState = {
@@ -17,6 +17,7 @@ const initialState: UserState = {
   email: "",
   image: "",
   online: false,
+  curr_url: "",
 };
 
 export const userSlice = createSlice({
@@ -37,12 +38,15 @@ export const userSlice = createSlice({
       state.image = "";
       state.email = "";
     },
+    userCurrPos: (state, action: PayloadAction<string>) => {
+      state.curr_url = action.payload;
+    },
   },
 });
 
 export const currentUserState = (state: RootState) => state.userState;
 
 // Action creators are generated for each case reducer function
-export const { userSignIn, userSignOut } = userSlice.actions;
+export const { userSignIn, userSignOut, userCurrPos } = userSlice.actions;
 
 export default userSlice.reducer;

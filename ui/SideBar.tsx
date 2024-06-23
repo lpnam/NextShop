@@ -1,24 +1,25 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { component_list } from "@/store/items";
 import { useSnapshot } from "valtio";
 import Image from "next/image";
 import MarkIcon from "@/icon/MarkIcon";
 import SettingIcon from "@/icon/SettingIcon";
 import CartIcon from "@/icon/CartIcon";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useCountItems } from "@/contexts/CountItems";
-import { useAppSelector } from "@/app/cushook/hooks";
-import { userSignIn, userSignOut } from "@/contexts/user/userSlice";
+import { useAppSelector, useAppDispatch } from "@/app/cushook/hooks";
+import { userCurrPos, userSignOut } from "@/contexts/user/userSlice";
 
 export default function SideBar() {
   const state_user = useAppSelector((state) => state.userState);
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const { components } = useSnapshot(component_list);
   const [active, setActive] = useState<string>("");
   const { countItem } = useCountItems();
   const [show, setShow] = useState<string>("");
   const router = useRouter();
+  const pathname = usePathname();
   const onClickHandler = (pagename: string, name: string) => {
     if (name) {
       setActive(name);
@@ -36,6 +37,19 @@ export default function SideBar() {
       setActive("");
     }
   };
+
+  const onClickSignSecond = () => {
+    if (state_user.online) {
+      dispatch(userSignOut());
+    } else {
+      router.push("/user/signup");
+    }
+  };
+
+  useEffect(() => {
+    const index = pathname.indexOf("/user");
+    if (index === -1) dispatch(userCurrPos(pathname));
+  }, [pathname]);
 
   // const onClickSearchBasicHandler = (e: MouseEvent<HTMLDivElement>) => {
   //   if (e.target instanceof HTMLDivElement) {
@@ -71,7 +85,7 @@ export default function SideBar() {
           </p>
           <p
             className="cursor-pointer text-sm font-normal hover:underline"
-            onClick={() => router.push("/user/signup")}
+            onClick={() => onClickSignSecond()}
           >
             {state_user.online ? "Sign Out" : "Sign Up"}
           </p>

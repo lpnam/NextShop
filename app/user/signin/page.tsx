@@ -5,9 +5,11 @@ import EyeIcon from "@/icon/EyeIcon";
 import EyeOffIcon from "@/icon/EyeOffIcon";
 import { useAppDispatch, useAppSelector } from "@/app/cushook/hooks";
 import { userSignIn } from "@/contexts/user/userSlice";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
   const state_user = useAppSelector((state) => state.userState);
+  const route = useRouter();
   const dispatch = useAppDispatch();
   const [show1, setShow1] = useState<boolean>(false);
   const handleClick1 = () => setShow1((prev) => !prev);
@@ -41,10 +43,12 @@ export default function Page() {
         pw_user: "",
       }));
 
-      alert(rs.message);
+      // alert(rs.message);
 
       if (rs.status === 200 || rs.status === 201) {
         dispatch(userSignIn(rs.data));
+        console.log(state_user.curr_url);
+        route.push(state_user.curr_url);
       } else {
         alert(rs.message);
       }
