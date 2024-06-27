@@ -20,6 +20,7 @@ export default function SideBar() {
   const [show, setShow] = useState<string>("");
   const router = useRouter();
   const pathname = usePathname();
+
   const onClickHandler = (pagename: string, name: string) => {
     if (name) {
       setActive(name);
@@ -46,10 +47,37 @@ export default function SideBar() {
     }
   };
 
+  const getSession = async () => {
+    try {
+      const response = await fetch("/api/user", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const rs = await response.json();
+
+      // alert(rs.message);
+
+      if (rs.status === 200 || rs.status === 201) {
+        alert(rs.message);
+      } else {
+        alert(rs.message);
+      }
+    } catch (error) {
+      console.error("Error submitting data:", error);
+    }
+  };
+
   useEffect(() => {
     const index = pathname.indexOf("/user");
     if (index === -1) dispatch(userCurrPos(pathname));
   }, [pathname]);
+
+  useEffect(() => {
+    async () => await getSession();
+  }, []);
 
   // const onClickSearchBasicHandler = (e: MouseEvent<HTMLDivElement>) => {
   //   if (e.target instanceof HTMLDivElement) {
