@@ -43,11 +43,8 @@ export default function Page() {
         pw_user: "",
       }));
 
-      // alert(rs.message);
-
       if (rs.status === 200 || rs.status === 201) {
-        dispatch(userSignIn(rs.data));
-        console.log(state_user.curr_url);
+        if (rs.data) dispatch(userSignIn(rs.data));
         route.push(state_user.curr_url);
       } else {
         alert(rs.message);

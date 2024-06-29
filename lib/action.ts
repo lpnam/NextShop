@@ -2,6 +2,8 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { UserData } from "@/lib/define";
 import { NextRequest, NextResponse } from "next/server";
+import { v4 as uuidv4 } from "uuid";
+import { updateUserSession, getUserBySession } from "@/user/user_utils";
 
 const secretKey = process.env.SECRET_KEY;
 const key = new TextEncoder().encode(secretKey);
@@ -10,7 +12,7 @@ export async function encrypt(payload: any) {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("10 sec from now")
+    .setExpirationTime("1000 sec from now")
     .sign(key);
 }
 
@@ -22,25 +24,23 @@ export async function decrypt(input: string): Promise<any> {
 }
 
 export async function login(data: UserData) {
-  const user: UserData = data;
+  const session = uuidv4();
+  console.log(session);
 
-  // Create the session
-  const expires = new Date(Date.now() + 10 * 1000);
-  const session = await encrypt({ user, expires });
-
+  const resp = await updateUserSession(data, session);
   // Save the session in a cookie
-  cookies().set("session", session, { expires, httpOnly: true });
+  cookies().set("session", session);
 }
 
 export async function logout() {
   // Destroy the session
-  cookies().set("session", "", { expires: new Date(0) });
+  cookies().set("session", "");
 }
 
 export async function getSession() {
   const session = cookies().get("session")?.value;
   if (!session) return null;
-  return await decrypt(session);
+  return await getUserBySession(session);
 }
 
 export async function updateSession(request: NextRequest) {

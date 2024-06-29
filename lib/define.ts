@@ -49,6 +49,7 @@ type UserData = {
 type ResponseData = {
   status: boolean;
   message: string;
+  data: UserData | undefined;
 };
 
 export type {

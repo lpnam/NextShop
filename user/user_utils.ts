@@ -24,7 +24,7 @@ async function pushUserData(user: UserData) {
   }
 }
 
-async function userSignIn(email: string, pw: string) {
+async function userLogIn(email: string, pw: string) {
   try {
     const supabase = createClient();
     const check: ResponseData = await checkUserID(email);
@@ -107,4 +107,60 @@ async function getUserInfo(email: string) {
   }
 }
 
-export { pushUserData, checkUserID, userSignIn, getUserInfo };
+async function updateUserSession(user: UserData, session_id: string) {
+  try {
+    console.log("GO HERE");
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("User")
+      .update({ session_id: session_id })
+      .eq("email", user.email)
+      .select();
+
+    if (error)
+      return <ResponseData>{ status: false, message: "Something went wrong" };
+    else {
+      console.log("data:" + data);
+      return <ResponseData>{ status: true, message: "Done" };
+    }
+  } catch (error) {
+    console.log(error);
+    return <ResponseData>{ status: false, message: "Something went wrong" };
+  }
+}
+
+async function getUserBySession(session_id: string) {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("User")
+      .select("*")
+      .eq("session_id", session_id);
+    if (error)
+      return <ResponseData>{ status: false, message: "Something went wrong" };
+    else
+      return <ResponseData>{
+        status: true,
+        message: "Done",
+        data: <UserData>{
+          first_name: data[0].first_name,
+          last_name: data[0].last_name,
+          email: data[0].email,
+          image: data[0].user_ima,
+          passcode: "",
+        },
+      };
+  } catch (error) {
+    console.log(error);
+    return <ResponseData>{ status: false, message: "Something went wrong" };
+  }
+}
+
+export {
+  pushUserData,
+  checkUserID,
+  userLogIn,
+  getUserInfo,
+  updateUserSession,
+  getUserBySession,
+};

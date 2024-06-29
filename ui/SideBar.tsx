@@ -9,7 +9,11 @@ import CartIcon from "@/icon/CartIcon";
 import { useRouter, usePathname } from "next/navigation";
 import { useCountItems } from "@/contexts/CountItems";
 import { useAppSelector, useAppDispatch } from "@/app/cushook/hooks";
-import { userCurrPos, userSignOut } from "@/contexts/user/userSlice";
+import {
+  userCurrPos,
+  userSignOut,
+  userSignIn,
+} from "@/contexts/user/userSlice";
 
 export default function SideBar() {
   const state_user = useAppSelector((state) => state.userState);
@@ -41,7 +45,7 @@ export default function SideBar() {
 
   const onClickSignSecond = () => {
     if (state_user.online) {
-      dispatch(userSignOut());
+      signOut();
     } else {
       router.push("/user/signup");
     }
@@ -58,12 +62,33 @@ export default function SideBar() {
 
       const rs = await response.json();
 
+      if (rs.status === 200 || rs.status === 201) {
+        if (rs.data) dispatch(userSignIn(rs.data));
+      } else {
+        console.log(rs.message);
+      }
+    } catch (error) {
+      console.error("Error submitting data:", error);
+    }
+  };
+
+  const signOut = async () => {
+    try {
+      const response = await fetch("/api/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const rs = await response.json();
+
       // alert(rs.message);
 
       if (rs.status === 200 || rs.status === 201) {
-        alert(rs.message);
+        dispatch(userSignOut());
       } else {
-        alert(rs.message);
+        console.log(rs.message);
       }
     } catch (error) {
       console.error("Error submitting data:", error);
@@ -71,13 +96,14 @@ export default function SideBar() {
   };
 
   useEffect(() => {
+    // Call getSession when the component mounts
+    getSession();
+  }, []);
+
+  useEffect(() => {
     const index = pathname.indexOf("/user");
     if (index === -1) dispatch(userCurrPos(pathname));
   }, [pathname]);
-
-  useEffect(() => {
-    async () => await getSession();
-  }, []);
 
   // const onClickSearchBasicHandler = (e: MouseEvent<HTMLDivElement>) => {
   //   if (e.target instanceof HTMLDivElement) {
