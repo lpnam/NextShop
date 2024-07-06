@@ -11,7 +11,7 @@ import SpecsList from "@/ui/SpecsList";
 
 export default async function Page({ params }: { params: { item: string } }) {
   const { item } = params;
-  console.log(params);
+  // console.log(params);
   const data = await GetDetailData(item);
   const specs_raw_data: string[] = await GetSpecsDetail(data.item_id);
   const list_specs: SpecsData[] = handleSpecsData(specs_raw_data);

@@ -25,7 +25,7 @@ export async function decrypt(input: string): Promise<any> {
 
 export async function login(data: UserData) {
   const session = uuidv4();
-  console.log(session);
+  // console.log(session);
 
   const resp = await updateUserSession(data, session);
   // Save the session in a cookie

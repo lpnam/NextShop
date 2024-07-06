@@ -14,6 +14,8 @@ import {
   userSignOut,
   userSignIn,
 } from "@/contexts/user/userSlice";
+import { userClickAvatarUpdateStatus } from "@/contexts/user/userClickAvatarSlice";
+import useScreenCheck from "@/app/cushook/useScreenCheck";
 
 export default function SideBar() {
   const state_user = useAppSelector((state) => state.userState);
@@ -22,10 +24,13 @@ export default function SideBar() {
   const [active, setActive] = useState<string>("");
   const { countItem } = useCountItems();
   const [show, setShow] = useState<string>("");
+  const [showSetting, setShowSetting] = useState<boolean>(false);
   const router = useRouter();
   const pathname = usePathname();
+  const isSmallScreen = useScreenCheck();
 
   const onClickHandler = (pagename: string, name: string) => {
+    setShowSetting(false);
     if (name) {
       setActive(name);
     }
@@ -33,6 +38,7 @@ export default function SideBar() {
   };
 
   const onClickShowHandler = (name: string, child: number) => {
+    setShowSetting(false);
     if (window.innerWidth < 768 || child === 0)
       router.push(`/${name.toLowerCase()}`);
     else {
@@ -44,11 +50,22 @@ export default function SideBar() {
   };
 
   const onClickSignSecond = () => {
+    setShowSetting(false);
     if (state_user.online) {
       signOut();
     } else {
       router.push("/user/signup");
     }
+  };
+
+  const onClickAvatar = () => {
+    // if (isSmallScreen) {
+    if (state_user.online) {
+      setShowSetting((prev) => !prev);
+    } else {
+      router.push("/user/signin");
+    }
+    // }
   };
 
   const getSession = async () => {
@@ -101,29 +118,27 @@ export default function SideBar() {
   }, []);
 
   useEffect(() => {
+    dispatch(userClickAvatarUpdateStatus(showSetting));
+  }, [showSetting]);
+
+  useEffect(() => {
     const index = pathname.indexOf("/user");
     if (index === -1) dispatch(userCurrPos(pathname));
   }, [pathname]);
 
-  // const onClickSearchBasicHandler = (e: MouseEvent<HTMLDivElement>) => {
-  //   if (e.target instanceof HTMLDivElement) {
-  //     if (
-  //       e.target.dataset.type === "brand" ||
-  //       e.target.dataset.type === "component"
-  //     )
-  //       setBasicSearch(e.target.dataset.type);
-  //   }
-  // };
-
   return (
     <div className="h-full w-1/6 rounded-r-xl bg-sidebarColor fixed p-4 flex flex-col shadow-md">
       <div className="w-full flex justify-center xl:justify-start items-center gap-4">
-        <div className=" w-[55px] h-[55px] rounded-full shadow-xl cursor-pointer">
+        <div
+          className=" w-[55px] h-[55px] rounded-full shadow-xl cursor-pointer"
+          onClick={onClickAvatar}
+        >
           <Image
             width={55}
             height={55}
             alt="user-avatar"
-            src="/icon/user_online.png"
+            // /state_user.online
+            src={state_user.online ? "/icon/user_online.png" : "/icon/user.png"}
             className="min-w-[44px]"
             priority
           />

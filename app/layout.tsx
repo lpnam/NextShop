@@ -6,6 +6,7 @@ import Header from "@/ui/Header";
 import { Suspense } from "react";
 import LoadingW from "./loading";
 import Footer from "@/ui/Footer";
+import UserSettingList from "@/ui/UserSettingList";
 import { CountProvider } from "@/contexts/CountItems";
 import StyledComponentsRegistry from "@/lib/antd.registry";
 import { UserStateProvider } from "@/contexts/user/UserState";
@@ -31,6 +32,7 @@ export default function RootLayout({
           <UserStateProvider>
             <CountProvider>
               <SideBar />
+              <UserSettingList />
               <main className="body-container">
                 <Header />
                 <Suspense fallback={<LoadingW />}>{children}</Suspense>

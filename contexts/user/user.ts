@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./userSlice";
+import userClickAvatarSlice from "./userClickAvatarSlice";
 
 const store = configureStore({
   reducer: {
     userState: userReducer,
+    userClickAvatarState: userClickAvatarSlice,
   },
 });
 

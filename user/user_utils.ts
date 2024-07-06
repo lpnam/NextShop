@@ -109,7 +109,6 @@ async function getUserInfo(email: string) {
 
 async function updateUserSession(user: UserData, session_id: string) {
   try {
-    console.log("GO HERE");
     const supabase = createClient();
     const { data, error } = await supabase
       .from("User")
@@ -120,7 +119,6 @@ async function updateUserSession(user: UserData, session_id: string) {
     if (error)
       return <ResponseData>{ status: false, message: "Something went wrong" };
     else {
-      console.log("data:" + data);
       return <ResponseData>{ status: true, message: "Done" };
     }
   } catch (error) {

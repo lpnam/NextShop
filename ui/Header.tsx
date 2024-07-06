@@ -13,9 +13,13 @@ export default function Header() {
     event.preventDefault();
     router.push(`/search?opt=${search}`);
   };
+
   return (
-    <div className="z-[999] h-[5em] w-full rounded-b-md flex items-center justify-between bg-headerColor transition-shadow p-1">
-      <div className="flex-1 flex h-full items-center justify-center flex-grow-[2] xl:flex-grow-[3] gap-2 py-1 mx-1">
+    <div className="z-[888] h-[5em] w-full rounded-b-md flex items-center justify-between bg-headerColor transition-shadow p-1">
+      <div
+        className="flex-1 flex h-full items-center justify-center flex-grow-[2] xl:flex-grow-[3] gap-2 py-1 mx-1 hover:cursor-pointer"
+        onClick={() => router.push("/")}
+      >
         <NextLogo setWidth={55} setHeight={55} />
         <span className="hidden xl:block font-bold text-2xl">NEXT SHOP</span>
       </div>

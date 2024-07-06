@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     // alert("Signup successfully!");
     // redirect("/user/signin");
     const session = await getSession();
-    console.log(JSON.stringify(session));
+    // console.log(JSON.stringify(session));
     return NextResponse.json({
       message: resp.message,
       status: 200,
